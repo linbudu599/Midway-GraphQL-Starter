@@ -9,6 +9,7 @@
     "emitDecoratorMetadata": true,
     "inlineSourceMap": true,
     "noImplicitThis": true,
+    "esModuleInterop": true,
     "noUnusedLocals": false,
     "stripInternal": true,
     "pretty": true,
