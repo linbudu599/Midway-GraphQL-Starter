@@ -5,7 +5,7 @@ import User, {
   UserCreateInput,
   UserUpdateInput,
   UserPaginationInput,
-} from '../graphql/user';
+} from '../graphql/user.type';
 import { UserRole, IDefaultPagination } from '../utils/constants';
 
 @Provide()

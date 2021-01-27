@@ -1,10 +1,19 @@
 import { EntityModel } from '@midwayjs/orm';
-import { PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import {
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  BaseEntity,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 import User from './User.entity';
 
+import { IPost } from '../graphql/post.type';
+
 @EntityModel()
-export default class Post {
+export default class Post extends BaseEntity implements IPost {
   @PrimaryGeneratedColumn()
   postId: number;
 
@@ -18,4 +27,10 @@ export default class Post {
     onDelete: 'SET NULL',
   })
   author: User;
+
+  @CreateDateColumn()
+  createDate!: Date;
+
+  @UpdateDateColumn()
+  updateDate!: Date;
 }

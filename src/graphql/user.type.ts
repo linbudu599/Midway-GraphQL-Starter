@@ -1,4 +1,11 @@
-import { Field, ID, ObjectType, InputType, Int } from 'type-graphql';
+import {
+  Field,
+  ID,
+  ObjectType,
+  InputType,
+  Int,
+  InterfaceType,
+} from 'type-graphql';
 
 import {
   IsNumber,
@@ -8,6 +15,21 @@ import {
   Max,
   Min,
 } from 'class-validator';
+
+@InterfaceType()
+export abstract class IUser {
+  @Field(type => ID)
+  id!: number;
+
+  @Field()
+  name!: string;
+
+  @Field(type => Date)
+  createDate!: Date;
+
+  @Field(type => Date)
+  updateDate!: Date;
+}
 
 @ObjectType()
 export default class User {

@@ -1,4 +1,4 @@
-import User from '../graphql/user';
+import User from '../graphql/user.type';
 
 export const getMockUser = () => {
   let users: User[] = [];
