@@ -3,10 +3,44 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+"""
+The javascript `Date` as string. Type represents date and time as the ISO Date string.
+"""
+scalar DateTime
+
+interface IPost {
+  content: String!
+  createDate: DateTime!
+  postId: ID!
+  title: String!
+  updateDate: DateTime!
+}
+
+interface IProfile {
+  createDate: DateTime!
+  description: String!
+  profileId: ID!
+  updateDate: DateTime!
+}
+
+interface IUser {
+  createDate: DateTime!
+  id: ID!
+  name: String!
+  updateDate: DateTime!
+}
+
 type Mutation {
   CreateUser(createParams: UserCreateInput!): User
   DeleteUser(id: Int!): User
   UpdateUser(updateParams: UserUpdateInput!): User
+}
+
+type Profile implements IProfile {
+  createDate: DateTime!
+  description: String!
+  profileId: ID!
+  updateDate: DateTime!
 }
 
 type Query {
@@ -14,9 +48,11 @@ type Query {
   GetUserById(id: Int!): User
 }
 
-type User {
+type User implements IUser {
+  createDate: DateTime!
   id: ID!
   name: String!
+  updateDate: DateTime!
 }
 
 input UserCreateInput {

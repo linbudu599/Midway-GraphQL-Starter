@@ -21,6 +21,9 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
 - [ ] Prisma2
 - [ ] Logger >>> Pino / Winston
 - [ ] Deploy PM2
+- [ ] I18N Setup
+  - [ ] zh-CN
+  - [ ] en-US
 - [ ] CI/CD
   - [ ] GitHub Actions
   - [ ] Travis

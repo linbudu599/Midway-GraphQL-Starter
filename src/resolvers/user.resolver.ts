@@ -1,12 +1,16 @@
 import { Provide, Inject } from '@midwayjs/decorator';
 import { Resolver, Query, Authorized, Arg, Int, Mutation } from 'type-graphql';
 
-import User, {
+import User from '../entities/User.entity';
+
+import {
   UserCreateInput,
   UserUpdateInput,
   UserPaginationInput,
 } from '../graphql/user.type';
+
 import { UserRole, IDefaultPagination } from '../utils/constants';
+import { createUser } from '../utils/mock';
 
 @Provide()
 @Resolver(of => User)
@@ -38,10 +42,10 @@ export default class UserResolver {
   ) {
     const len = this.mockUser.length;
     const id = this.mockUser[len - 1].id + 1;
-    const createdUser = {
+    const createdUser = createUser({
       id,
       name: createParams.name,
-    };
+    });
     this.mockUser.push(createdUser);
 
     return createdUser;

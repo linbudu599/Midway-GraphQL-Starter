@@ -8,7 +8,9 @@ import {
 } from 'type-graphql';
 
 import {
+  IsInt,
   IsNumber,
+  IsOptional,
   IsPositive,
   IsString,
   Length,
@@ -31,15 +33,6 @@ export abstract class IUser {
   updateDate!: Date;
 }
 
-@ObjectType()
-export default class User {
-  @Field(type => ID)
-  id!: number;
-
-  @Field()
-  name!: string;
-}
-
 @InputType()
 export class UserCreateInput {
   @Field()
@@ -58,19 +51,22 @@ export class UserUpdateInput {
   @Field()
   @IsString()
   @Length(2, 10)
-  name!: string;
+  @IsOptional()
+  name?: string;
 }
 
 @InputType()
 export class UserPaginationInput {
-  @IsNumber()
-  @Min(0)
   @Field(type => Int)
+  @IsInt()
+  @IsOptional()
+  @Min(0)
   offset?: number;
 
-  @IsNumber()
+  @Field(type => Int)
+  @IsInt()
+  @IsOptional()
   @Min(5)
   @Max(100)
-  @Field(type => Int)
   take?: number;
 }
