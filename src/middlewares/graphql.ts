@@ -6,8 +6,9 @@ import { ApolloServer, ServerRegistration } from 'apollo-server-koa';
 import { buildSchemaSync } from 'type-graphql';
 
 import { UserRole } from '../utils/constants';
-
 import { authChecker } from '../utils/authChecker';
+
+import { IContext } from '../typing';
 
 @Provide('GraphQLMiddleware')
 export class GraphqlMiddleware implements IWebMiddleware {
@@ -18,10 +19,12 @@ export class GraphqlMiddleware implements IWebMiddleware {
   app: IMidwayKoaApplication;
 
   resolve() {
+    const container = this.app.getApplicationContext();
+
     const server = new ApolloServer({
       schema: buildSchemaSync({
         resolvers: [path.resolve(this.app.getBaseDir(), 'resolver/*')],
-        container: this.app.getApplicationContext(),
+        container,
         authChecker,
         authMode: 'error',
         emitSchemaFile: true,
@@ -30,7 +33,8 @@ export class GraphqlMiddleware implements IWebMiddleware {
         currentReqUser: {
           role: UserRole.ADMIN,
         },
-      },
+        container,
+      } as IContext,
     });
     console.log('Apollo-GraphQL Invoke');
 

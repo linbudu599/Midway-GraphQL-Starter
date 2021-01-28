@@ -1,7 +1,21 @@
-import { Provide, Inject } from '@midwayjs/decorator';
-import { Resolver, Query, Authorized, Arg, Int, Mutation } from 'type-graphql';
+import { Provide, Inject, App } from '@midwayjs/decorator';
+import { IMidwayApplication } from '@midwayjs/core';
+import { InjectEntityModel } from '@midwayjs/orm';
+import { IMidwayKoaApplication } from '@midwayjs/koa';
+
+import {
+  Resolver,
+  Query,
+  Authorized,
+  Arg,
+  Int,
+  Mutation,
+  Ctx,
+} from 'type-graphql';
+import { DeleteResult, Repository } from 'typeorm';
 
 import User from '../entities/User.entity';
+import { UserService } from '../services/user.service';
 
 import {
   UserCreateInput,
@@ -10,63 +24,60 @@ import {
 } from '../graphql/user.type';
 
 import { UserRole, IDefaultPagination } from '../utils/constants';
-import { createUser } from '../utils/mock';
+import { IContext } from '../typing';
 
 @Provide()
 @Resolver(of => User)
 export default class UserResolver {
+  @App()
+  app: IMidwayKoaApplication;
+
   @Inject()
   mockUser: User[];
+
+  @InjectEntityModel(User)
+  userModel: Repository<User>;
 
   @Inject()
   pagination: IDefaultPagination;
 
+  @Inject()
+  userService: UserService;
+
   @Authorized(UserRole.ADMIN)
   @Query(returns => [User])
-  GetAllUsers(
+  async GetAllUsers(
     @Arg('pagination', type => UserPaginationInput, { nullable: true })
-    pagination: UserPaginationInput
-  ): User[] {
+    pagination: UserPaginationInput,
+
+    @Ctx() context: IContext
+  ): Promise<User[]> {
     const { offset, take } = pagination ?? this.pagination;
-    return this.mockUser.slice(offset, offset + take);
+    console.log(context.container === this.app.getApplicationContext()); // true
+    return await this.userService.getAllUsers(offset, take);
   }
 
   @Query(returns => User, { nullable: true })
-  GetUserById(@Arg('id', type => Int) id: number): User {
-    return this.mockUser.find(value => value.id === id);
+  async GetUserById(@Arg('id', type => Int) id: number): Promise<User> {
+    return await this.userService.getUserById(id);
   }
 
   @Mutation(returns => User, { nullable: true })
-  CreateUser(
+  async CreateUser(
     @Arg('createParams', type => UserCreateInput) createParams: UserCreateInput
   ) {
-    const len = this.mockUser.length;
-    const id = this.mockUser[len - 1].id + 1;
-    const createdUser = createUser({
-      id,
-      name: createParams.name,
-    });
-    this.mockUser.push(createdUser);
-
-    return createdUser;
+    return await this.userService.createUser(createParams);
   }
 
   @Mutation(returns => User, { nullable: true })
-  UpdateUser(
+  async UpdateUser(
     @Arg('updateParams', type => UserUpdateInput) updateParams: UserUpdateInput
-  ): User {
-    const updateItem = this.mockUser.find(val => val.id === updateParams.id);
-    updateItem.name = updateParams.name;
-
-    return updateItem;
+  ): Promise<User> {
+    return await this.UpdateUser(updateParams);
   }
 
   @Mutation(returns => User, { nullable: true })
-  DeleteUser(@Arg('id', type => Int) id: number): User {
-    const deleteItem = this.mockUser.find(val => val.id === id);
-    const deleteIdx = this.mockUser.indexOf(deleteItem);
-
-    this.mockUser.splice(deleteIdx, 1);
-    return deleteItem;
+  async DeleteUser(@Arg('id', type => Int) id: number): Promise<DeleteResult> {
+    return await this.userService.deleteUser(id);
   }
 }
