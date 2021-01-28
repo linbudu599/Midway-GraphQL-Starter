@@ -33,7 +33,7 @@ export class APIController {
   @Inject()
   userService: UserService;
 
-  @Get('/users')
+  @Get('/users', { middleware: ['SpecificMiddleware'] })
   async getAllUser(@Query(ALL) pagination: UserPaginationInput) {
     const { offset = 0, take = 10 } = pagination;
     const users = await this.userService.getAllUsers(offset, take);

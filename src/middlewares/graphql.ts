@@ -10,6 +10,8 @@ import { authChecker } from '../utils/authChecker';
 
 import { IContext } from '../typing';
 
+import ResolveTimeMiddleware from './resolve.graphql';
+
 @Provide('GraphQLMiddleware')
 export class GraphqlMiddleware implements IWebMiddleware {
   @Config('apollo')
@@ -28,9 +30,11 @@ export class GraphqlMiddleware implements IWebMiddleware {
         authChecker,
         authMode: 'error',
         emitSchemaFile: true,
+        globalMiddlewares: [ResolveTimeMiddleware],
       }),
       context: {
         currentReqUser: {
+          // TODO: get by JWT validation
           role: UserRole.ADMIN,
         },
         container,
