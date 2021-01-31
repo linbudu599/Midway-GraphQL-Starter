@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GraphQL Schema Voyager</title>
+    <script src="https://cdn.jsdelivr.net/npm/react@16/umd/react.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@16/umd/react-dom.production.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/graphql-voyager/dist/voyager.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/graphql-voyager/dist/voyager.min.js"></script>
+  </head>
+  <body>
+    <div id="voyager">Loading...</div>
+    <script>
+      function introspectionProvider(introspectionQuery) {
+        return fetch('http://localhost:7001/graphql', {
+          method: 'post',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query: introspectionQuery }),
+        })
+          .then(function (response) {
+            return response.text();
+          })
+          .then(function (responseBody) {
+            try {
+              return JSON.parse(responseBody);
+            } catch (error) {
+              return responseBody;
+            }
+          });
+      }
+
+      // Render <Voyager />
+      GraphQLVoyager.init(document.getElementById('voyager'), {
+        introspection: introspectionProvider,
+        displayOptions: {
+          skipDeprecated: false,
+          showLeafFields: true,
+        },
+      });
+    </script>
+  </body>
+</html>

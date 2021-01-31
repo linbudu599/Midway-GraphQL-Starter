@@ -14,6 +14,7 @@
     "egg": "^2.0.0",
     "egg-scripts": "^2.10.0",
     "graphql": "^15.5.0",
+    "graphql-query-complexity": "^0.7.2",
     "graphql-voyager": "^1.0.0-rc.31",
     "jsonwebtoken": "^8.5.1",
     "sqlite3": "^5.0.1",
@@ -23,6 +24,7 @@
     "typeorm-seeding": "^1.6.1"
   },
   "devDependencies": {
+    "@2fd/graphdoc": "^2.4.0",
     "@midwayjs/cli": "^1.0.0",
     "@midwayjs/egg-ts-helper": "^1.0.1",
     "@midwayjs/luckyeye": "^1.0.0",
@@ -41,6 +43,7 @@
     "prettier": "^2.2.1",
     "pretty-quick": "^3.1.0",
     "rimraf": "^3.0.2",
+    "serve": "^11.3.2",
     "ts-jest": "^26.2.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.0.0"
@@ -59,7 +62,11 @@
     "lint:fix": "mwts fix",
     "ci": "npm run cov",
     "build": "midway-bin build -c",
-    "check": "luckyeye"
+    "check": "luckyeye",
+    "voyager": "serve -s voyager/index.html",
+    "docs:gen": "rimraf -rf ./documentation && graphdoc --force",
+    "docs:serve": "serve -s ./documentation",
+    "docs": "npm run docs:gen && npm run docs:serve"
   },
   "midway-bin-clean": [
     ".vscode/.tsbuildinfo",
@@ -74,6 +81,10 @@
     "type": "git",
     "url": ""
   },
-  "author": "",
-  "license": "MIT"
+  "author": "linbudu599",
+  "license": "MIT",
+  "graphdoc": {
+    "endpoint": "http://localhost:7001/graphql",
+    "output": "./documentation"
+  }
 }
