@@ -18,6 +18,9 @@ import {
   Min,
 } from 'class-validator';
 
+import Profile from '../entities/Profile.entity';
+import Post from '../entities/Post.entity';
+
 @InterfaceType()
 export abstract class IUser {
   @Field(type => ID)
@@ -28,6 +31,12 @@ export abstract class IUser {
 
   @Field(type => Date)
   createDate!: Date;
+
+  @Field(type => Profile, { nullable: true })
+  profile?: Profile;
+
+  @Field(type => [Post]!, { nullable: true })
+  posts!: Post[];
 
   @Field(type => Date)
   updateDate!: Date;

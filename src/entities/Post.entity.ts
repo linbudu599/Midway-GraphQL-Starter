@@ -11,7 +11,9 @@ import {
 import User from './User.entity';
 
 import { IPost } from '../graphql/post.type';
+import { ObjectType } from 'type-graphql';
 
+@ObjectType({ implements: IPost })
 @EntityModel()
 export default class Post extends BaseEntity implements IPost {
   @PrimaryGeneratedColumn()

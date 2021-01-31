@@ -1,5 +1,4 @@
 import { Provide, Inject, App } from '@midwayjs/decorator';
-import { IMidwayApplication } from '@midwayjs/core';
 import { InjectEntityModel } from '@midwayjs/orm';
 import { IMidwayKoaApplication } from '@midwayjs/koa';
 
@@ -74,10 +73,5 @@ export default class UserResolver {
     @Arg('updateParams', type => UserUpdateInput) updateParams: UserUpdateInput
   ): Promise<User> {
     return await this.UpdateUser(updateParams);
-  }
-
-  @Mutation(returns => User, { nullable: true })
-  async DeleteUser(@Arg('id', type => Int) id: number): Promise<DeleteResult> {
-    return await this.userService.deleteUser(id);
   }
 }

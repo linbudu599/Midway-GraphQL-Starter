@@ -8,6 +8,10 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 """
 scalar DateTime
 
+input DeleteProfileInput {
+  id: Int!
+}
+
 interface IPost {
   content: String!
   createDate: DateTime!
@@ -27,13 +31,24 @@ interface IUser {
   createDate: DateTime!
   id: ID!
   name: String!
+  posts: [Post!]
+  profile: Profile
   updateDate: DateTime!
 }
 
 type Mutation {
   CreateUser(createParams: UserCreateInput!): User
   DeleteUser(id: Int!): User
+  UpdateProfile(updateParams: UpdateProfileInput!): Profile!
   UpdateUser(updateParams: UserUpdateInput!): User
+}
+
+type Post implements IPost {
+  content: String!
+  createDate: DateTime!
+  postId: ID!
+  title: String!
+  updateDate: DateTime!
 }
 
 type Profile implements IProfile {
@@ -45,13 +60,20 @@ type Profile implements IProfile {
 
 type Query {
   GetAllUsers(pagination: UserPaginationInput): [User!]!
+  GetProfileById(id: Int!): Profile!
   GetUserById(id: Int!): User
+}
+
+input UpdateProfileInput {
+  id: Int!
 }
 
 type User implements IUser {
   createDate: DateTime!
   id: ID!
   name: String!
+  posts: [Post!]
+  profile: Profile
   updateDate: DateTime!
 }
 

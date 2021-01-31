@@ -26,12 +26,16 @@ export default class User extends BaseEntity implements IUser {
   name: string;
 
   @OneToOne(type => Profile, profile => profile.user, {
+    onDelete: 'SET NULL',
+    nullable: true,
     cascade: true,
   })
   @JoinColumn()
   profile: Profile;
 
   @OneToMany(type => Post, post => post.author, {
+    onDelete: 'SET NULL',
+    nullable: true,
     cascade: true,
   })
   posts: Post[];

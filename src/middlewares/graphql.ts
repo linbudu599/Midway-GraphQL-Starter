@@ -12,6 +12,9 @@ import { IContext } from '../typing';
 
 import ResolveTimeMiddleware from './resolve.graphql';
 
+import complexityPlugin from '../plugins/complexity';
+import { schemaPlugin, usagePlugin } from '../plugins/report';
+
 @Provide('GraphQLMiddleware')
 export class GraphqlMiddleware implements IWebMiddleware {
   @Config('apollo')
@@ -22,16 +25,17 @@ export class GraphqlMiddleware implements IWebMiddleware {
 
   resolve() {
     const container = this.app.getApplicationContext();
+    const schema = buildSchemaSync({
+      resolvers: [path.resolve(this.app.getBaseDir(), 'resolver/*')],
+      container,
+      authChecker,
+      authMode: 'error',
+      emitSchemaFile: true,
+      globalMiddlewares: [ResolveTimeMiddleware],
+    });
 
     const server = new ApolloServer({
-      schema: buildSchemaSync({
-        resolvers: [path.resolve(this.app.getBaseDir(), 'resolver/*')],
-        container,
-        authChecker,
-        authMode: 'error',
-        emitSchemaFile: true,
-        globalMiddlewares: [ResolveTimeMiddleware],
-      }),
+      schema,
       context: {
         currentReqUser: {
           // TODO: get by JWT validation
@@ -39,6 +43,7 @@ export class GraphqlMiddleware implements IWebMiddleware {
         },
         container,
       } as IContext,
+      plugins: [schemaPlugin(), usagePlugin(), complexityPlugin(schema)],
     });
     console.log('Apollo-GraphQL Invoke');
 

@@ -13,3 +13,5 @@ export const defaultPagination = {
   offset: 0,
   take: 10,
 };
+
+export const MAX_ALLOWED_COMPLEXITY = 20;

@@ -11,13 +11,10 @@ import {
   ALL,
   Validate,
 } from '@midwayjs/decorator';
-
 import { Context } from 'egg';
-
 import { ValidationError } from 'joi';
 
 import { UserService } from '../services/user.service';
-
 import {
   CreateUserInput,
   UpdateUserInput,
@@ -26,7 +23,7 @@ import {
 
 @Provide()
 @Controller('/api')
-export class APIController {
+export class UserAPIController {
   @Inject()
   ctx: Context;
 
@@ -43,7 +40,7 @@ export class APIController {
   @Get('/user/:id')
   async getUserById(@Param() id: number) {
     const user = await this.userService.getUserById(id);
-    return { success: true, message: 'OK', data: user ?? {} };
+    return { success: true, message: 'OK', data: user };
   }
 
   @Post('/user/create')
