@@ -14,3 +14,5 @@ run/
 .tsbuildinfo
 .tsbuildinfo.*
 typings
+/src/prisma/client
+*.sqlite

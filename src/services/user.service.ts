@@ -1,6 +1,6 @@
 import { Provide } from '@midwayjs/decorator';
-import { InjectEntityModel } from '@midwayjs/orm';
-import { Repository } from 'typeorm';
+import { InjectEntityModel, InjectEntityManager } from '../lib/orm';
+import { Repository, EntityManager } from 'typeorm';
 
 import User from '../entities/User.entity';
 import { CreateUserInput, UpdateUserInput } from '../dto/user.dto';
@@ -9,6 +9,9 @@ import { CreateUserInput, UpdateUserInput } from '../dto/user.dto';
 export class UserService {
   @InjectEntityModel(User)
   userModel: Repository<User>;
+
+  @InjectEntityManager()
+  entityManager: EntityManager;
 
   async getAllUsers(offset: number, take: number): Promise<User[]> {
     return await this.userModel.find({

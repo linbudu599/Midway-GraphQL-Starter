@@ -38,7 +38,6 @@ interface IUser {
 
 type Mutation {
   CreateUser(createParams: UserCreateInput!): User
-  DeleteUser(id: Int!): User
   UpdateProfile(updateParams: UpdateProfileInput!): Profile!
   UpdateUser(updateParams: UserUpdateInput!): User
 }
