@@ -13,6 +13,10 @@ import { IContext } from '../typing';
 export const InjectCurrentUser = () =>
   createParamDecorator<IContext>(({ context }) => context.currentReqUser);
 
+// the same as this.app.getApplicationContext()
+export const InjectCurrentContainer = () =>
+  createParamDecorator<IContext>(({ context }) => context.container);
+
 export const CustomArgsValidation = <T extends object>(
   ValidateSchema: ClassType<T>
 ) => {

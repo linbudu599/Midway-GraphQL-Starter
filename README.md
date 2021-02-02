@@ -14,7 +14,6 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
   - [ ] Extensions
   - [ ] Plugins
   - [ ] Directives
-  - [ ] ScopedContainer on MidwayJS Container
 - [ ] TypeORM
 - [ ] DataLoader Adapter of TypeORM
 - [ ] SQLite3
