@@ -15,6 +15,10 @@ import ResolveTimeMiddleware from './resolve.graphql';
 import complexityPlugin from '../plugins/complexity';
 import { schemaPlugin, usagePlugin } from '../plugins/report';
 
+import { InterceptorOnSpecificUser } from '../interceptors/graphql.interceptor';
+
+import { extensionPlugin } from '../extensions/set-up-by-plugin';
+
 @Provide('GraphQLMiddleware')
 export class GraphqlMiddleware implements IWebMiddleware {
   @Config('apollo')
@@ -31,7 +35,7 @@ export class GraphqlMiddleware implements IWebMiddleware {
       authChecker,
       authMode: 'error',
       emitSchemaFile: true,
-      globalMiddlewares: [ResolveTimeMiddleware],
+      globalMiddlewares: [ResolveTimeMiddleware, InterceptorOnSpecificUser],
     });
 
     const server = new ApolloServer({
@@ -43,7 +47,12 @@ export class GraphqlMiddleware implements IWebMiddleware {
         },
         container,
       } as IContext,
-      plugins: [schemaPlugin(), usagePlugin(), complexityPlugin(schema)],
+      plugins: [
+        schemaPlugin(),
+        usagePlugin(),
+        complexityPlugin(schema),
+        extensionPlugin(),
+      ],
     });
     console.log('Apollo-GraphQL Invoke');
 

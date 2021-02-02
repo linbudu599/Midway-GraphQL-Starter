@@ -16,6 +16,8 @@ Common
 
 - try/catch & exception filter
 - JWT
+- Pipeline
+- Custom Component
 
 
 Koa / Express Eco
