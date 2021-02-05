@@ -4,11 +4,9 @@ REST
 
 GraphQL
 
-- Scoped Container >>> Scope
 - Context
 - Middleware
 - Enum & Union Type
-- Schema Visualization
 - Args: Relation & Result Control
 - Safe & Performance
 
@@ -17,7 +15,6 @@ Common
 - try/catch & exception filter
 - JWT
 - Pipeline
-- Custom Component
 
 
 Koa / Express Eco
@@ -26,4 +23,5 @@ Koa / Express Eco
 - helmet
 - cors
 - static
+- multer
 - ...

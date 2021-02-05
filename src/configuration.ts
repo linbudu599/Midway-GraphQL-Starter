@@ -1,8 +1,9 @@
 import { Configuration, App } from '@midwayjs/decorator';
 import { ILifeCycle } from '@midwayjs/core';
 import { IMidwayKoaApplication } from '@midwayjs/koa';
-import dotenv from 'dotenv';
 import { getConnection } from 'typeorm';
+
+import dotenv from 'dotenv';
 
 import { getMockUser } from './utils/mock';
 import { defaultPagination } from './utils/constants';
@@ -34,6 +35,10 @@ export class ContainerConfiguration implements ILifeCycle {
 
     this.app.use(await this.app.generateMiddleware('ResolveTimeMiddleware'));
     this.app.use(await this.app.generateMiddleware('GraphQLMiddleware'));
+    this.app.use(await this.app.generateMiddleware('HelmetMiddleware'));
+    this.app.use(await this.app.generateMiddleware('CompressMiddleware'));
+    // this.app.use(await this.app.generateMiddleware('RateLimitMiddleware'));
+
     this.app.getApplicationContext().registerObject('mockUser', getMockUser());
     this.app
       .getApplicationContext()
