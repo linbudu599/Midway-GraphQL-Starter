@@ -50,6 +50,7 @@ export class ContainerConfiguration implements ILifeCycle {
 
     const mockPost1 = new Post();
     mockPost1.title = 'The Power of MidwayJS';
+    mockPost1.content = 'enjoy it!';
 
     mockUser1.name = '张三';
     mockUser1.profile = mockProfile1;

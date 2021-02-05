@@ -5,6 +5,7 @@ import {
   InputType,
   Int,
   InterfaceType,
+  Directive,
 } from 'type-graphql';
 
 @InterfaceType()
@@ -15,6 +16,7 @@ export abstract class IPost {
   @Field()
   title: string;
 
+  @Directive('@capitalize')
   @Field()
   content: string;
 

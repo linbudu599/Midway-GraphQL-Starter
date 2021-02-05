@@ -4,6 +4,7 @@ import { IWebMiddleware, IMidwayKoaApplication } from '@midwayjs/koa';
 
 import { ApolloServer, ServerRegistration } from 'apollo-server-koa';
 import { buildSchemaSync } from 'type-graphql';
+import { SchemaDirectiveVisitor } from 'graphql-tools';
 
 import { UserRole } from '../utils/constants';
 import { authChecker } from '../utils/authChecker';
@@ -18,6 +19,8 @@ import { schemaPlugin, usagePlugin } from '../plugins/report';
 import { InterceptorOnSpecificUser } from '../interceptors/graphql.interceptor';
 
 import { extensionPlugin } from '../extensions/set-up-by-plugin';
+
+import { CapitalizeDirective } from '../directives/string';
 
 @Provide('GraphQLMiddleware')
 export class GraphqlMiddleware implements IWebMiddleware {
@@ -36,6 +39,10 @@ export class GraphqlMiddleware implements IWebMiddleware {
       authMode: 'error',
       emitSchemaFile: true,
       globalMiddlewares: [ResolveTimeMiddleware, InterceptorOnSpecificUser],
+    });
+
+    SchemaDirectiveVisitor.visitSchemaDirectives(schema, {
+      capitalize: CapitalizeDirective,
     });
 
     const server = new ApolloServer({
