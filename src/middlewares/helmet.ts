@@ -1,9 +1,5 @@
 import { Provide } from '@midwayjs/decorator';
-import {
-  IWebMiddleware,
-  IMidwayKoaContext,
-  IMidwayKoaNext,
-} from '@midwayjs/koa';
+import { IWebMiddleware } from '@midwayjs/koa';
 
 import helmet from 'koa-helmet';
 

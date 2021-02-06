@@ -1,14 +1,35 @@
 import { Provide } from '@midwayjs/decorator';
-import { IWebMiddleware } from '@midwayjs/express';
+import { IWebMiddleware } from '@midwayjs/koa';
 
-import RateLimit from 'express-rate-limit';
+import ratelimit from 'koa-ratelimit';
+
+const db = new Map();
 
 @Provide('RateLimitMiddleware')
 export default class RateLimitMiddleware implements IWebMiddleware {
   resolve() {
-    return RateLimit({
-      windowMs: 15 * 60 * 1000, // 15 minutes
-      max: 100, // limit each IP to 100 requests per windowMs
+    return ratelimit({
+      driver: 'memory',
+      db: db,
+      duration: 60000,
+      errorMessage: 'Sometimes You Just Have to Slow Down.',
+      id: ctx => ctx.ip,
+      headers: {
+        remaining: 'Rate-Limit-Remaining',
+        reset: 'Rate-Limit-Reset',
+        total: 'Rate-Limit-Total',
+      },
+
+      max: 100,
+      disableHeader: false,
+      whitelist: ctx => {
+        // some logic that returns a boolean
+        return true;
+      },
+      blacklist: ctx => {
+        // some logic that returns a boolean
+        return true;
+      },
     });
   }
 }

@@ -14,9 +14,10 @@ export class ReportInfo implements IMethodAspect {
       `${ctx.method.toLocaleUpperCase()} ${ctx.path} is handle by ${methodName}`
     );
   }
-  async around(joinPoint: JoinPoint) {}
+  // do not define empty method
+  // async around(joinPoint: JoinPoint) {}
 
-  async afterReturn(joinPoint: JoinPoint, result: any) {}
-  async afterThrow(joinPoint: JoinPoint, error: Error) {}
-  async after(point: JoinPoint, result: any, error: Error) {}
+  // async afterReturn(joinPoint: JoinPoint, result: any) {}
+  // async afterThrow(joinPoint: JoinPoint, error: Error) {}
+  // async after(point: JoinPoint, result: any, error: Error) {}
 }

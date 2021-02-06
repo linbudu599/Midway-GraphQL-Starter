@@ -37,7 +37,10 @@ export class ContainerConfiguration implements ILifeCycle {
     this.app.use(await this.app.generateMiddleware('GraphQLMiddleware'));
     this.app.use(await this.app.generateMiddleware('HelmetMiddleware'));
     this.app.use(await this.app.generateMiddleware('CompressMiddleware'));
-    // this.app.use(await this.app.generateMiddleware('RateLimitMiddleware'));
+    this.app.use(await this.app.generateMiddleware('CORSMiddleware'));
+    this.app.use(await this.app.generateMiddleware('JSONPrettierMiddleware'));
+    this.app.use(await this.app.generateMiddleware('RateLimitMiddleware'));
+    this.app.use(await this.app.generateMiddleware('StaticMiddleware'));
 
     this.app.getApplicationContext().registerObject('mockUser', getMockUser());
     this.app
