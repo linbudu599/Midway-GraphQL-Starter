@@ -2,15 +2,7 @@ import { Provide, Inject, App } from '@midwayjs/decorator';
 import { InjectEntityModel } from '@midwayjs/orm';
 import { IMidwayKoaApplication } from '@midwayjs/koa';
 
-import {
-  Resolver,
-  Query,
-  Authorized,
-  Arg,
-  Int,
-  Mutation,
-  Ctx,
-} from 'type-graphql';
+import { Resolver, Query, Arg, Int, Mutation } from 'type-graphql';
 import { Repository } from 'typeorm';
 
 import User from '../entities/User.entity';
