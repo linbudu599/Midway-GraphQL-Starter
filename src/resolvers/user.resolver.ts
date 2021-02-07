@@ -24,7 +24,6 @@ import {
 
 import { UserRole, IDefaultPagination } from '../utils/constants';
 import { IContext } from '../typing';
-import { PrismaClient } from '../prisma/client';
 
 @Provide()
 @Resolver(of => User)
@@ -40,11 +39,6 @@ export default class UserResolver {
 
   @Inject()
   userService: UserService;
-
-  // In GraphQL Resolver, you can get prisma client instance by directly inject(@Inject)
-  // or inject to ApolloServer context, then get client @Ctx()
-  @Inject('prisma')
-  prisma: PrismaClient;
 
   @Authorized(UserRole.ADMIN)
   @Query(returns => [User])

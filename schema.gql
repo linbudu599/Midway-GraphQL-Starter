@@ -50,6 +50,12 @@ type Post implements IPost {
   updateDate: DateTime!
 }
 
+type PrismaSample {
+  createdAt: DateTime!
+  id: ID!
+  version: String!
+}
+
 type Profile implements IProfile {
   createDate: DateTime!
   description: String!
@@ -61,6 +67,7 @@ type Query {
   GetAllUsers(pagination: UserPaginationInput): [User!]!
   GetProfileById(id: Int!): Profile!
   GetUserById(id: Int!): User
+  PrismaSample: [PrismaSample!]!
 }
 
 input UpdateProfileInput {

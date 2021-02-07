@@ -33,6 +33,13 @@ export class ContainerConfiguration implements ILifeCycle {
     client.$connect();
     this.app.getApplicationContext().registerObject('prisma', client);
 
+    // Prisma Mock Data Seeding
+    await client.prismaSampleModel.create({
+      data: {
+        version: 2,
+      },
+    });
+
     this.app.use(await this.app.generateMiddleware('ResolveTimeMiddleware'));
     this.app.use(await this.app.generateMiddleware('GraphQLMiddleware'));
     this.app.use(await this.app.generateMiddleware('HelmetMiddleware'));
@@ -46,12 +53,11 @@ export class ContainerConfiguration implements ILifeCycle {
       .getApplicationContext()
       .registerObject('pagination', defaultPagination);
 
+    // TypeORM Mock Data Seeding
     const connection = getConnection();
 
     infoLog(`[ TypeORM ] connection [${connection.name}] established`);
-
     await createMockUserData();
-
     infoLog('[ TypeORM ] Mock Data Inserted');
   }
 
