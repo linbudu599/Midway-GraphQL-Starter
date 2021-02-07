@@ -7,8 +7,8 @@ const InterceptorOnUserEntityRequest = (
 ): MiddlewareFn => async ({ root, args, context, info }, next) => {
   let res: string | User[] = await next();
 
-  console.log('info ' + info.fieldName + '  ' + info.parentType.name);
-  console.log('res ' + res);
+  // console.log('info ' + info.fieldName + '  ' + info.parentType.name);
+  // console.log('res ' + res);
 
   // Interceptor at final execution
   // when resolver got here, res is "张三"(basic scalar type will be executed at last)

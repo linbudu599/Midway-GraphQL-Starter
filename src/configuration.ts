@@ -5,7 +5,7 @@ import { getConnection } from 'typeorm';
 
 import dotenv from 'dotenv';
 
-import { getMockUser } from './utils/mock';
+import { createMockUserData } from './utils/mock';
 import { defaultPagination } from './utils/constants';
 import { infoLog } from './utils/helper';
 
@@ -42,7 +42,6 @@ export class ContainerConfiguration implements ILifeCycle {
     this.app.use(await this.app.generateMiddleware('RateLimitMiddleware'));
     this.app.use(await this.app.generateMiddleware('StaticMiddleware'));
 
-    this.app.getApplicationContext().registerObject('mockUser', getMockUser());
     this.app
       .getApplicationContext()
       .registerObject('pagination', defaultPagination);
@@ -51,20 +50,7 @@ export class ContainerConfiguration implements ILifeCycle {
 
     infoLog(`[ TypeORM ] connection [${connection.name}] established`);
 
-    const mockUser1 = new User();
-
-    const mockProfile1 = new Profile();
-    mockProfile1.description = 'A Coder';
-
-    const mockPost1 = new Post();
-    mockPost1.title = 'The Power of MidwayJS';
-    mockPost1.content = 'enjoy it!';
-
-    mockUser1.name = '张三';
-    mockUser1.profile = mockProfile1;
-    mockUser1.posts = [mockPost1];
-
-    await mockUser1.save();
+    await createMockUserData();
 
     infoLog('[ TypeORM ] Mock Data Inserted');
   }

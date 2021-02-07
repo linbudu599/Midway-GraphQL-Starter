@@ -7,6 +7,7 @@ import { CreateUserInput, UpdateUserInput } from '../dto/user.dto';
 
 @Provide()
 export class UserService {
+  // FIXME: 无法在构造函数中初始化
   userQueryBuilder: SelectQueryBuilder<User>;
 
   @InjectEntityModel(User)
@@ -15,23 +16,27 @@ export class UserService {
   @InjectEntityManager()
   entityManager: EntityManager;
 
-  @Init()
-  async initialize(): Promise<void> {
-    // you can also use params to create QueryBuilder with(or without) relations
-    this.userQueryBuilder = this.userModel
+  // you can also use params to create QueryBuilder with(or without) relations
+  private createUserQueryBuilder() {
+    return this.userModel
       .createQueryBuilder('user')
       .leftJoinAndSelect('user.posts', 'posts')
       .leftJoinAndSelect('user.profile', 'profile');
   }
 
   async getAllUsers(offset: number, take: number): Promise<User[]> {
-    // works as same
+    // both work
     // return await this.userModel.find({
     //   skip: offset,
     //   take,
     //   relations: ['posts', 'profile'],
     // });
-    return await this.userQueryBuilder.offset(offset).take(take).getMany();
+    const res = await this.createUserQueryBuilder()
+      .offset(offset)
+      .take(take)
+      .getMany();
+
+    return res;
   }
 
   async getUserById(id: number): Promise<User> {

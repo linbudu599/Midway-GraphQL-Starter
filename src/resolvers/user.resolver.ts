@@ -32,9 +32,6 @@ export default class UserResolver {
   @App()
   app: IMidwayKoaApplication;
 
-  @Inject()
-  mockUser: User[];
-
   @InjectEntityModel(User)
   userModel: Repository<User>;
 
@@ -58,7 +55,7 @@ export default class UserResolver {
     @Ctx() context: IContext
   ): Promise<User[]> {
     const { offset, take } = pagination ?? this.pagination;
-    console.log(context.container === this.app.getApplicationContext()); // true
+    // console.log(context.container === this.app.getApplicationContext()); // true
     return await this.userService.getAllUsers(offset, take);
   }
 
