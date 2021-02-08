@@ -1,3 +1,4 @@
+import path from 'path';
 import { Configuration, App } from '@midwayjs/decorator';
 import { ILifeCycle } from '@midwayjs/core';
 import { IMidwayKoaApplication } from '@midwayjs/koa';
@@ -9,14 +10,13 @@ import { createMockUserData } from './utils/mock';
 import { defaultPagination } from './utils/constants';
 import { infoLog } from './utils/helper';
 
-import User from './entities/User.entity';
-import Profile from './entities/Profile.entity';
-import Post from './entities/Post.entity';
-
 import { PrismaClient } from './prisma/client';
 
-// Prisma require env variables
-dotenv.config();
+dotenv.config({
+  path: ['development', 'local'].includes(process.env.NODE_ENV)
+    ? path.resolve(process.cwd(), '.env.dev')
+    : path.resolve(process.cwd(), '.env.prod'),
+});
 
 const client = new PrismaClient();
 
@@ -39,6 +39,12 @@ export class ContainerConfiguration implements ILifeCycle {
         version: 2,
       },
     });
+
+    this.app.use(
+      await this.app.generateMiddleware('UnAuthorizedHandlerMiddleware')
+    );
+
+    this.app.use(await this.app.generateMiddleware('KoaJWTMiddleware'));
 
     this.app.use(await this.app.generateMiddleware('ResolveTimeMiddleware'));
     this.app.use(await this.app.generateMiddleware('GraphQLMiddleware'));
