@@ -42,13 +42,14 @@ export class ContainerConfiguration implements ILifeCycle {
 
     this.app.use(await this.app.generateMiddleware('ResolveTimeMiddleware'));
     this.app.use(await this.app.generateMiddleware('GraphQLMiddleware'));
-    this.app.use(await this.app.generateMiddleware('HelmetMiddleware'));
+    // this.app.use(await this.app.generateMiddleware('HelmetMiddleware'));
     this.app.use(await this.app.generateMiddleware('CompressMiddleware'));
     this.app.use(await this.app.generateMiddleware('CORSMiddleware'));
-    this.app.use(await this.app.generateMiddleware('JSONPrettierMiddleware'));
-    this.app.use(await this.app.generateMiddleware('RateLimitMiddleware'));
-    this.app.use(await this.app.generateMiddleware('StaticMiddleware'));
+    // this.app.use(await this.app.generateMiddleware('JSONPrettierMiddleware'));
+    // this.app.use(await this.app.generateMiddleware('RateLimitMiddleware'));
+    // this.app.use(await this.app.generateMiddleware('StaticMiddleware'));
 
+    // Inject Shared Application Data Here
     this.app
       .getApplicationContext()
       .registerObject('pagination', defaultPagination);

@@ -8,6 +8,7 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
 
 - [x] Basic Power of [MidwayJS](https://www.yuque.com/midwayjs/midway_v2)
 - [x] TypeORM
+  - [lib/orm](src/lib/orm) will be removed after this [PR](https://github.com/midwayjs/midway-component/pull/24) got merged.
 - [x] SQLite3
 - [ ] Logger >>> Pino / Winston
 - [ ] Tests Setup
@@ -18,20 +19,18 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
 - [x] Apollo-Server
 - [x] TypeGraphQL
 - [x] Prisma2(with built-in [DataLoader Implementation](https://github.com/prisma/prisma/blob/master/src/packages/client/src/runtime/Dataloader.ts) to handle **N+1**)
-- [ ] DataLoader Adapter of TypeORM
+- [ ] DataLoader Integration
 - [x] Directives(For more useful directives, see [here](https://github.com/linbudu599/GraphQL-Explorer-Server/tree/master/server/directives))
 - [x] AuthChecker
 - [x] Plugins
 - GraphQL Helper
-  - [x] GenQL
   - [x] GraphQL-Voyager
   - [x] GraphQLDoc
 
 ### Dev
 
-- [ ] Deployment Setup(Prisma & GenQL Generation)
 - [ ] CI/CD
-  - [ ] GitHub Actions
+  - [x] GitHub Actions
   - [ ] TravisCI
 - [ ] Component Generator (Experimental for `mw gen` command)
 - [ ] Lint
