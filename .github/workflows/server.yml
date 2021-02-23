@@ -58,9 +58,9 @@ jobs:
           npm install
 
       - name: Invoke Generation Scripts
-        if: runner.os != 'Windows'
         run: |
-          npm run gen
+          npm run docs:gen
+          npm run codegen
 
   # 单元测试 + 覆盖率
   # test-check:

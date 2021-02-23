@@ -37,7 +37,7 @@ export class GraphqlMiddleware implements IWebMiddleware {
       container,
       authChecker,
       authMode: 'error',
-      emitSchemaFile: true,
+      emitSchemaFile: 'schema.graphql',
       globalMiddlewares: [ResolveTimeMiddleware, InterceptorOnSpecificUser],
     });
 

@@ -22,7 +22,8 @@
     "prisma": "npm run prisma:generate && npm run prisma:push",
     "prisma:generate": "prisma generate --schema ./src/prisma/schema.prisma",
     "prisma:push": "prisma db push --preview-feature --schema ./src/prisma/schema.prisma",
-    "prisma:migrate": "prisma migrate --preview-feature --schema ./src/prisma/schema.prisma"
+    "prisma:migrate": "prisma migrate --preview-feature --schema ./src/prisma/schema.prisma",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "@koa/cors": "^3.1.0",
@@ -58,6 +59,7 @@
   },
   "devDependencies": {
     "@2fd/graphdoc": "^2.4.0",
+    "@graphql-codegen/cli": "1.20.1",
     "@midwayjs/cli": "^1.2.41",
     "@midwayjs/egg-ts-helper": "^1.0.5",
     "@midwayjs/luckyeye": "^1.0.2",
@@ -87,7 +89,10 @@
     "serve": "^11.3.2",
     "ts-jest": "^26.5.1",
     "ts-node": "^9.1.1",
-    "typescript": "^4.1.5"
+    "typescript": "^4.1.5",
+    "@graphql-codegen/typescript": "1.21.0",
+    "@graphql-codegen/typescript-resolvers": "1.18.2",
+    "@graphql-codegen/introspection": "1.18.1"
   },
   "engines": {
     "node": ">=12.0.0"
