@@ -14,7 +14,6 @@ import {
 } from '@midwayjs/decorator';
 import { Context } from 'egg';
 import { ValidationError } from 'joi';
-import jwt from 'jsonwebtoken';
 
 import { UserService } from '../services/user.service';
 import {
@@ -22,7 +21,6 @@ import {
   UpdateUserInput,
   UserPaginationInput,
 } from '../dto/user.dto';
-import { IJWTConfig } from '../typing';
 
 @Provide()
 @Controller('/api')
@@ -32,29 +30,6 @@ export class UserAPIController {
 
   @Inject()
   userService: UserService;
-
-  @Config('jwt')
-  jwtConfig: IJWTConfig;
-
-  @Get('/token')
-  async dispatchToken() {
-    const token = jwt.sign(
-      {
-        user: '林不渡',
-      },
-      // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoi5p6X5LiN5rihIiwiaWF0IjoxNjEyNzY3NzQ3LCJleHAiOjE2MTMzNzI1NDd9.geYEU8O9kc9NeuANJGLuTcdgrS-NOlnLF7eAQ4riklc
-      this.jwtConfig.secretKey,
-      { expiresIn: '7d' }
-    );
-    return { success: true, message: 'OK', token: token };
-  }
-
-  @Get('/401')
-  async UnAuthorized() {
-    // this.ctx.throw(401);
-    this.ctx.status = 401;
-    return { success: false, code: 401 };
-  }
 
   @Get('/users', { middleware: ['SpecificMiddleware'] })
   async getAllUser(@Query(ALL) pagination: UserPaginationInput) {

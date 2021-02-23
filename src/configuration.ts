@@ -40,12 +40,6 @@ export class ContainerConfiguration implements ILifeCycle {
       },
     });
 
-    this.app.use(
-      await this.app.generateMiddleware('UnAuthorizedHandlerMiddleware')
-    );
-
-    this.app.use(await this.app.generateMiddleware('KoaJWTMiddleware'));
-
     this.app.use(await this.app.generateMiddleware('ResolveTimeMiddleware'));
     this.app.use(await this.app.generateMiddleware('GraphQLMiddleware'));
     this.app.use(await this.app.generateMiddleware('HelmetMiddleware'));

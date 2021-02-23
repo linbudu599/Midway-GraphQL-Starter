@@ -10,7 +10,6 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
 - [x] TypeORM
 - [x] SQLite3
 - [ ] Logger >>> Pino / Winston
-- [ ] Auth(JWT)
 - [ ] Tests Setup
 - [x] Middlewares(**Koa Implementation**): `compress` / `helmet` / `logger` / `static` / ...
 
@@ -34,9 +33,7 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
 - [ ] CI/CD
   - [ ] GitHub Actions
   - [ ] TravisCI
-  - [ ] Vercel
 - [ ] Component Generator (Experimental for `mw gen` command)
-- [ ] Configuration Center Bus(Experimental for `@midwayjs/config`)
 - [ ] Lint
   - [ ] CommitLint
   - [ ] Git Hooks

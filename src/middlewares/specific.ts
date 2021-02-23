@@ -5,6 +5,11 @@ import {
   IMidwayKoaNext,
 } from '@midwayjs/koa';
 
+/**
+ * @class SpecificMiddleware
+ * @description Middleware that only work at specific path
+ * @implements {IWebMiddleware}
+ */
 @Provide('SpecificMiddleware')
 export default class SpecificMiddleware implements IWebMiddleware {
   resolve() {

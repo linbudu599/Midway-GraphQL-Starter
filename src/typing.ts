@@ -7,9 +7,3 @@ export interface IContext {
   };
   container: IMidwayContainer;
 }
-
-export interface IJWTConfig {
-  secretKey: string;
-  excludePath?: string[];
-  passthrough?: boolean;
-}
