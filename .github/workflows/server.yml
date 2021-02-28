@@ -1,10 +1,10 @@
-name: GraphQL-Explorer-Server
+name: Midway-GraphQL-Starter
 
 on:
   push:
-    branches: [master]
+    branches: [master, main]
   pull_request:
-    branches: [master]
+    branches: [master, main]
 
 jobs:
   # 任务1: 编译+部署项目
