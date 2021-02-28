@@ -37,9 +37,8 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
 - [x] CI: [GitHub Actions](.github/workflows/server.yml)
   - CD: Use [ssh-deploy](https://github.com/easingthemes/ssh-deploy).
 - [ ] Component Generator (Experimental for `mw gen` command)
-- [ ] Lint
-  - [ ] CommitLint
-  - [ ] Git Hooks
+- [x] [CommitLint](.commitlintrc.js)
+- [x] Git Hooks
 
 ## Quick Start
 

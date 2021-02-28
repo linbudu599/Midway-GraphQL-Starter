@@ -23,7 +23,20 @@
     "prisma:generate": "prisma generate --schema ./src/prisma/schema.prisma",
     "prisma:push": "prisma db push --preview-feature --schema ./src/prisma/schema.prisma",
     "prisma:migrate": "prisma migrate --preview-feature --schema ./src/prisma/schema.prisma",
+    "commit": "git add -A && git-cz",
     "codegen": "graphql-codegen --config codegen.yml"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-push": "npm run build && npm run test"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    }
   },
   "dependencies": {
     "@koa/cors": "^3.1.0",
@@ -59,7 +72,12 @@
   },
   "devDependencies": {
     "@2fd/graphdoc": "^2.4.0",
+    "@commitlint/cli": "^12.0.1",
+    "@commitlint/config-conventional": "^12.0.1",
     "@graphql-codegen/cli": "1.20.1",
+    "@graphql-codegen/introspection": "1.18.1",
+    "@graphql-codegen/typescript": "1.21.0",
+    "@graphql-codegen/typescript-resolvers": "1.18.2",
     "@midwayjs/cli": "^1.2.41",
     "@midwayjs/egg-ts-helper": "^1.0.5",
     "@midwayjs/luckyeye": "^1.0.2",
@@ -76,8 +94,13 @@
     "@types/lodash": "^4.14.168",
     "@types/node": "14",
     "chalk": "^4.1.0",
+    "commitizen": "^4.2.3",
+    "commitlint-config-cz": "^0.13.2",
     "cross-env": "^7.0.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "cz-customizable": "^6.3.0",
     "fs-extra": "^9.1.0",
+    "husky": "^5.1.1",
     "inquirer": "^7.3.3",
     "jest": "^26.6.3",
     "mwts": "^1.1.2",
@@ -89,10 +112,7 @@
     "serve": "^11.3.2",
     "ts-jest": "^26.5.1",
     "ts-node": "^9.1.1",
-    "typescript": "^4.1.5",
-    "@graphql-codegen/typescript": "1.21.0",
-    "@graphql-codegen/typescript-resolvers": "1.18.2",
-    "@graphql-codegen/introspection": "1.18.1"
+    "typescript": "^4.1.5"
   },
   "engines": {
     "node": ">=12.0.0"

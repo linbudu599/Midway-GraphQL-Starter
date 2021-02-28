@@ -31,8 +31,17 @@ jobs:
         run: |
           npm install
 
+      - name: Build
+        run: |
+          npm run build
+
       - name: Serve
-        run: npm run start
+        run: |
+          npm run start
+
+      - name: Stop
+        run: |
+          npm run stop
 
   generation:
     name: Code & Docs Generation
@@ -63,30 +72,32 @@ jobs:
           npm run codegen
 
   # 单元测试 + 覆盖率
-  # test-check:
-  #   name: Unit Test & CodeCov Report
+  test-check:
+    name: Unit Test & CodeCov Report
 
-  #   strategy:
-  #     matrix:
-  #       node-version: [12.x, 14.x]
-  #       os: [ubuntu-latest, macOS-latest, windows-latest]
+    strategy:
+      matrix:
+        # node-version: [12.x, 14.x]
+        # os: [ubuntu-latest, macOS-latest, windows-latest]
+        node-version: [14.x]
+        os: [macOS-latest]
 
-  #   runs-on: ${{ matrix.os }}
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@master
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
 
-  #     - name: Use Node.js ${{ matrix.node-version }}
-  #       uses: actions/setup-node@v1
-  #       with:
-  #         node-version: ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
-  #     - name: Install Dependencies
-  #       run: |
-  #         npm install
+      - name: Install Dependencies
+        run: |
+          npm install
 
-  #     - name: Unit Test & Codecov Report
-  #       if: runner.os != 'Windows'
-  #       run: |
-  #         npm run test
-  #         bash <(curl -s https://codecov.io/bash)
+      - name: Unit Test & Codecov Report
+        if: runner.os != 'Windows'
+        run: |
+          npm run test
+          # bash <(curl -s https://codecov.io/bash)
