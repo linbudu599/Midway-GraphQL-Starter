@@ -77,7 +77,7 @@
     "@graphql-codegen/cli": "1.20.1",
     "@graphql-codegen/introspection": "1.18.1",
     "@graphql-codegen/typescript": "1.21.0",
-    "@graphql-codegen/typescript-resolvers": "1.18.2",
+    "@graphql-codegen/typescript-resolvers": "1.19.1",
     "@midwayjs/cli": "^1.2.41",
     "@midwayjs/egg-ts-helper": "^1.0.5",
     "@midwayjs/luckyeye": "^1.0.2",
