@@ -17,6 +17,7 @@ export const InjectCurrentUser = () =>
 export const InjectCurrentContainer = () =>
   createParamDecorator<IContext>(({ context }) => context.container);
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export const CustomArgsValidation = <T extends object>(
   ValidateSchema: ClassType<T>
 ) => {

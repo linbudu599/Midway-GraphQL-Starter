@@ -21,8 +21,6 @@ import {
 export type StringTransformer = (arg: string) => string;
 
 /**
- *
- *
  * @param {string} directiveNameArg Directive Name Appeared In DSL
  * @param {StringTransformer} transformer string transformer function like `@lowerCase`
  * @return {*}  {typeof SchemaDirectiveVisitor}

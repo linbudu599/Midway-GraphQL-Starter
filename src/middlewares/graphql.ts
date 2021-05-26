@@ -49,7 +49,6 @@ export class GraphqlMiddleware implements IWebMiddleware {
       schema,
       context: {
         currentReqUser: {
-          // TODO: should get by JWT validation
           role: UserRole.ADMIN,
         },
         container,

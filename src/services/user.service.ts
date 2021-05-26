@@ -1,5 +1,5 @@
 import { Init, Provide } from '@midwayjs/decorator';
-import { InjectEntityModel, InjectEntityManager } from '../lib/orm';
+import { InjectEntityModel, InjectEntityManager } from '@midwayjs/orm';
 import { Repository, EntityManager, SelectQueryBuilder } from 'typeorm';
 
 import User from '../entities/User.entity';
