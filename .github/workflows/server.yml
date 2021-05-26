@@ -3,11 +3,11 @@ name: Midway-GraphQL-Starter
 on:
   push:
     branches: [master, main]
-  pull_request:
-    branches: [master, main]
+  # pull_request:
+  #   branches: [master, main]
 
 jobs:
-  build-deploy:
+  build-and-deploy:
     name: Build And Deploy
 
     strategy:
@@ -32,6 +32,7 @@ jobs:
 
       - name: Build
         run: |
+          yarn prisma
           yarn build
 
       - name: Serve
@@ -71,7 +72,6 @@ jobs:
           yarn docs:gen
           yarn codegen
 
-  # 单元测试 + 覆盖率
   test-check:
     name: Unit Test & CodeCov Report
 
