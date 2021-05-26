@@ -7,8 +7,8 @@ on:
   #   branches: [master, main]
 
 jobs:
-  build-and-deploy:
-    name: Build And Deploy
+  build:
+    name: Build
 
     strategy:
       matrix:
@@ -34,44 +34,6 @@ jobs:
         run: |
           yarn prisma
           yarn build
-
-      - name: Serve
-        run: |
-          yarn start
-
-      - name: Stop
-        run: |
-          yarn stop
-
-  generation:
-    name: Code & Docs Generation
-
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x]
-        os: [ubuntu-latest, macOS-latest, windows-latest]
-
-    runs-on: ${{ matrix.os }}
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@master
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Install Dependencies
-        run: |
-          yarn
-
-      - name: Invoke Generation Scripts
-        run: |
-          yarn prisma
-          yarn start
-          yarn docs:gen
-          yarn codegen
 
   test-check:
     name: Unit Test & CodeCov Report
