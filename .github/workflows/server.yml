@@ -69,6 +69,7 @@ jobs:
       - name: Invoke Generation Scripts
         run: |
           yarn prisma
+          yarn start
           yarn docs:gen
           yarn codegen
 
