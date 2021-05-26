@@ -7,7 +7,6 @@ on:
     branches: [master, main]
 
 jobs:
-  # 任务1: 编译+部署项目
   build-deploy:
     name: Build And Deploy
 
@@ -27,21 +26,21 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install Dependencies
+      - name: Install
         run: |
-          npm install
+          yarn
 
       - name: Build
         run: |
-          npm run build
+          yarn build
 
       - name: Serve
         run: |
-          npm run start
+          yarn start
 
       - name: Stop
         run: |
-          npm run stop
+          yarn stop
 
   generation:
     name: Code & Docs Generation
@@ -64,12 +63,13 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          npm install
+          yarn
 
       - name: Invoke Generation Scripts
         run: |
-          npm run docs:gen
-          npm run codegen
+          yarn prisma
+          yarn docs:gen
+          yarn codegen
 
   # 单元测试 + 覆盖率
   test-check:
@@ -77,8 +77,6 @@ jobs:
 
     strategy:
       matrix:
-        # node-version: [12.x, 14.x]
-        # os: [ubuntu-latest, macOS-latest, windows-latest]
         node-version: [14.x]
         os: [macOS-latest]
 
@@ -94,10 +92,10 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          npm install
+          yarn
 
       - name: Unit Test & Codecov Report
         if: runner.os != 'Windows'
         run: |
-          npm run test
+          yarn test
           # bash <(curl -s https://codecov.io/bash)
