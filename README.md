@@ -8,7 +8,6 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
 
 - [x] Basic Power of [MidwayJS](https://www.yuque.com/midwayjs/midway_v2)
 - [x] TypeORM
-  - [lib/orm](src/lib/orm) will be removed after this [PR](https://github.com/midwayjs/midway-component/pull/24) got merged.
 - [x] SQLite3
 - [x] Middlewares (**Koa Implementation**): `compress` / `helmet` / `logger` / `static` / ...
 

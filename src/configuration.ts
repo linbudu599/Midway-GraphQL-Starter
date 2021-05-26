@@ -12,6 +12,8 @@ import { infoLog } from './utils/helper';
 
 import { PrismaClient } from './prisma/client';
 
+import * as orm from '@midwayjs/orm';
+
 dotenv.config({
   path: ['development', 'local'].includes(process.env.NODE_ENV)
     ? path.resolve(process.cwd(), '.env.dev')
@@ -21,7 +23,7 @@ dotenv.config({
 const client = new PrismaClient();
 
 @Configuration({
-  imports: ['./lib/orm'],
+  imports: [orm],
   importConfigs: ['./config'],
 })
 export class ContainerConfiguration implements ILifeCycle {

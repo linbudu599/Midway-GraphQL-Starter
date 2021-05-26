@@ -11,7 +11,7 @@ import { authChecker } from '../utils/authChecker';
 
 import { IContext } from '../typing';
 
-import ResolveTimeMiddleware from './resolve.graphql';
+import ResolveTimeMiddleware from './resolve-time.graphql';
 
 import complexityPlugin from '../plugins/complexity';
 import { schemaPlugin, usagePlugin } from '../plugins/report';
