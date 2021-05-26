@@ -15,52 +15,22 @@ export type Scalars = {
   DateTime: any;
 };
 
-export type Profile = IProfile & {
-  __typename?: 'Profile';
-  profileId: Scalars['ID'];
-  description: Scalars['String'];
-  createDate: Scalars['DateTime'];
-  updateDate: Scalars['DateTime'];
-};
 
-
-export type Post = IPost & {
-  __typename?: 'Post';
-  postId: Scalars['ID'];
-  title: Scalars['String'];
-  content: Scalars['String'];
-  createDate: Scalars['DateTime'];
-  updateDate: Scalars['DateTime'];
-};
-
-export type User = IUser & {
-  __typename?: 'User';
-  id: Scalars['ID'];
-  name: Scalars['String'];
-  createDate: Scalars['DateTime'];
-  profile?: Maybe<Profile>;
-  posts?: Maybe<Array<Post>>;
-  updateDate: Scalars['DateTime'];
-};
-
-export type PrismaSample = {
-  __typename?: 'PrismaSample';
-  id: Scalars['ID'];
-  version: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-};
-
-export type IProfile = {
-  profileId: Scalars['ID'];
-  description: Scalars['String'];
-  createDate: Scalars['DateTime'];
-  updateDate: Scalars['DateTime'];
+export type DeleteProfileInput = {
+  id: Scalars['Int'];
 };
 
 export type IPost = {
   postId: Scalars['ID'];
   title: Scalars['String'];
   content: Scalars['String'];
+  createDate: Scalars['DateTime'];
+  updateDate: Scalars['DateTime'];
+};
+
+export type IProfile = {
+  profileId: Scalars['ID'];
+  description: Scalars['String'];
   createDate: Scalars['DateTime'];
   updateDate: Scalars['DateTime'];
 };
@@ -74,26 +44,50 @@ export type IUser = {
   updateDate: Scalars['DateTime'];
 };
 
-export type UpdateProfileInput = {
-  id: Scalars['Int'];
+export type Mutation = {
+  __typename?: 'Mutation';
+  UpdateProfile: Profile;
+  CreateUser?: Maybe<User>;
+  UpdateUser?: Maybe<User>;
 };
 
-export type DeleteProfileInput = {
-  id: Scalars['Int'];
+
+export type MutationUpdateProfileArgs = {
+  updateParams: UpdateProfileInput;
 };
 
-export type UserCreateInput = {
-  name: Scalars['String'];
+
+export type MutationCreateUserArgs = {
+  createParams: UserCreateInput;
 };
 
-export type UserUpdateInput = {
-  id: Scalars['Int'];
-  name: Scalars['String'];
+
+export type MutationUpdateUserArgs = {
+  updateParams: UserUpdateInput;
 };
 
-export type UserPaginationInput = {
-  offset: Scalars['Int'];
-  take: Scalars['Int'];
+export type Post = IPost & {
+  __typename?: 'Post';
+  postId: Scalars['ID'];
+  title: Scalars['String'];
+  content: Scalars['String'];
+  createDate: Scalars['DateTime'];
+  updateDate: Scalars['DateTime'];
+};
+
+export type PrismaSample = {
+  __typename?: 'PrismaSample';
+  id: Scalars['ID'];
+  version: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+};
+
+export type Profile = IProfile & {
+  __typename?: 'Profile';
+  profileId: Scalars['ID'];
+  description: Scalars['String'];
+  createDate: Scalars['DateTime'];
+  updateDate: Scalars['DateTime'];
 };
 
 export type Query = {
@@ -119,26 +113,32 @@ export type QueryGetUserByIdArgs = {
   id: Scalars['Int'];
 };
 
-export type Mutation = {
-  __typename?: 'Mutation';
-  UpdateProfile: Profile;
-  CreateUser?: Maybe<User>;
-  UpdateUser?: Maybe<User>;
+export type UpdateProfileInput = {
+  id: Scalars['Int'];
 };
 
-
-export type MutationUpdateProfileArgs = {
-  updateParams: UpdateProfileInput;
+export type User = IUser & {
+  __typename?: 'User';
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  createDate: Scalars['DateTime'];
+  profile?: Maybe<Profile>;
+  posts?: Maybe<Array<Post>>;
+  updateDate: Scalars['DateTime'];
 };
 
-
-export type MutationCreateUserArgs = {
-  createParams: UserCreateInput;
+export type UserCreateInput = {
+  name: Scalars['String'];
 };
 
+export type UserPaginationInput = {
+  offset: Scalars['Int'];
+  take: Scalars['Int'];
+};
 
-export type MutationUpdateUserArgs = {
-  updateParams: UserUpdateInput;
+export type UserUpdateInput = {
+  id: Scalars['Int'];
+  name: Scalars['String'];
 };
 
 
@@ -219,101 +219,67 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  Profile: ResolverTypeWrapper<Profile>;
+  DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
+  DeleteProfileInput: DeleteProfileInput;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
+  IPost: ResolversTypes['Post'];
   ID: ResolverTypeWrapper<Scalars['ID']>;
   String: ResolverTypeWrapper<Scalars['String']>;
-  DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
-  Post: ResolverTypeWrapper<Post>;
-  User: ResolverTypeWrapper<User>;
-  PrismaSample: ResolverTypeWrapper<PrismaSample>;
   IProfile: ResolversTypes['Profile'];
-  IPost: ResolversTypes['Post'];
   IUser: ResolversTypes['User'];
-  UpdateProfileInput: UpdateProfileInput;
-  Int: ResolverTypeWrapper<Scalars['Int']>;
-  DeleteProfileInput: DeleteProfileInput;
-  UserCreateInput: UserCreateInput;
-  UserUpdateInput: UserUpdateInput;
-  UserPaginationInput: UserPaginationInput;
-  Query: ResolverTypeWrapper<{}>;
   Mutation: ResolverTypeWrapper<{}>;
+  Post: ResolverTypeWrapper<Post>;
+  PrismaSample: ResolverTypeWrapper<PrismaSample>;
+  Profile: ResolverTypeWrapper<Profile>;
+  Query: ResolverTypeWrapper<{}>;
+  UpdateProfileInput: UpdateProfileInput;
+  User: ResolverTypeWrapper<User>;
+  UserCreateInput: UserCreateInput;
+  UserPaginationInput: UserPaginationInput;
+  UserUpdateInput: UserUpdateInput;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  Profile: Profile;
+  DateTime: Scalars['DateTime'];
+  DeleteProfileInput: DeleteProfileInput;
+  Int: Scalars['Int'];
+  IPost: ResolversParentTypes['Post'];
   ID: Scalars['ID'];
   String: Scalars['String'];
-  DateTime: Scalars['DateTime'];
-  Post: Post;
-  User: User;
-  PrismaSample: PrismaSample;
   IProfile: ResolversParentTypes['Profile'];
-  IPost: ResolversParentTypes['Post'];
   IUser: ResolversParentTypes['User'];
-  UpdateProfileInput: UpdateProfileInput;
-  Int: Scalars['Int'];
-  DeleteProfileInput: DeleteProfileInput;
-  UserCreateInput: UserCreateInput;
-  UserUpdateInput: UserUpdateInput;
-  UserPaginationInput: UserPaginationInput;
-  Query: {};
   Mutation: {};
+  Post: Post;
+  PrismaSample: PrismaSample;
+  Profile: Profile;
+  Query: {};
+  UpdateProfileInput: UpdateProfileInput;
+  User: User;
+  UserCreateInput: UserCreateInput;
+  UserPaginationInput: UserPaginationInput;
+  UserUpdateInput: UserUpdateInput;
   Boolean: Scalars['Boolean'];
-};
-
-export type ProfileResolvers<ContextType = any, ParentType extends ResolversParentTypes['Profile'] = ResolversParentTypes['Profile']> = {
-  profileId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  createDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  updateDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
   name: 'DateTime';
 }
 
-export type PostResolvers<ContextType = any, ParentType extends ResolversParentTypes['Post'] = ResolversParentTypes['Post']> = {
+export type IPostResolvers<ContextType = any, ParentType extends ResolversParentTypes['IPost'] = ResolversParentTypes['IPost']> = {
+  __resolveType: TypeResolveFn<'Post', ParentType, ContextType>;
   postId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   updateDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  createDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  profile?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType>;
-  posts?: Resolver<Maybe<Array<ResolversTypes['Post']>>, ParentType, ContextType>;
-  updateDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type PrismaSampleResolvers<ContextType = any, ParentType extends ResolversParentTypes['PrismaSample'] = ResolversParentTypes['PrismaSample']> = {
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  version?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type IProfileResolvers<ContextType = any, ParentType extends ResolversParentTypes['IProfile'] = ResolversParentTypes['IProfile']> = {
   __resolveType: TypeResolveFn<'Profile', ParentType, ContextType>;
   profileId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  createDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  updateDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-};
-
-export type IPostResolvers<ContextType = any, ParentType extends ResolversParentTypes['IPost'] = ResolversParentTypes['IPost']> = {
-  __resolveType: TypeResolveFn<'Post', ParentType, ContextType>;
-  postId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   updateDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
 };
@@ -328,6 +294,36 @@ export type IUserResolvers<ContextType = any, ParentType extends ResolversParent
   updateDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
 };
 
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  UpdateProfile?: Resolver<ResolversTypes['Profile'], ParentType, ContextType, RequireFields<MutationUpdateProfileArgs, 'updateParams'>>;
+  CreateUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'createParams'>>;
+  UpdateUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'updateParams'>>;
+};
+
+export type PostResolvers<ContextType = any, ParentType extends ResolversParentTypes['Post'] = ResolversParentTypes['Post']> = {
+  postId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  createDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  updateDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PrismaSampleResolvers<ContextType = any, ParentType extends ResolversParentTypes['PrismaSample'] = ResolversParentTypes['PrismaSample']> = {
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  version?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ProfileResolvers<ContextType = any, ParentType extends ResolversParentTypes['Profile'] = ResolversParentTypes['Profile']> = {
+  profileId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  createDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  updateDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   PrismaSample?: Resolver<Array<ResolversTypes['PrismaSample']>, ParentType, ContextType>;
   GetProfileById?: Resolver<ResolversTypes['Profile'], ParentType, ContextType, RequireFields<QueryGetProfileByIdArgs, 'id'>>;
@@ -335,23 +331,27 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   GetUserById?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryGetUserByIdArgs, 'id'>>;
 };
 
-export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  UpdateProfile?: Resolver<ResolversTypes['Profile'], ParentType, ContextType, RequireFields<MutationUpdateProfileArgs, 'updateParams'>>;
-  CreateUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'createParams'>>;
-  UpdateUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'updateParams'>>;
+export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  createDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  profile?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType>;
+  posts?: Resolver<Maybe<Array<ResolversTypes['Post']>>, ParentType, ContextType>;
+  updateDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {
-  Profile?: ProfileResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
-  Post?: PostResolvers<ContextType>;
-  User?: UserResolvers<ContextType>;
-  PrismaSample?: PrismaSampleResolvers<ContextType>;
-  IProfile?: IProfileResolvers<ContextType>;
   IPost?: IPostResolvers<ContextType>;
+  IProfile?: IProfileResolvers<ContextType>;
   IUser?: IUserResolvers<ContextType>;
-  Query?: QueryResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
+  Post?: PostResolvers<ContextType>;
+  PrismaSample?: PrismaSampleResolvers<ContextType>;
+  Profile?: ProfileResolvers<ContextType>;
+  Query?: QueryResolvers<ContextType>;
+  User?: UserResolvers<ContextType>;
 };
 
 

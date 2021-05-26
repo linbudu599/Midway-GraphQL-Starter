@@ -15,27 +15,20 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
 
 - [x] [Apollo-Server](https://www.apollographql.com/docs/apollo-server/)
 - [x] [TypeGraphQL](https://typegraphql.com/)
-- [x] [Prisma2](https://www.prisma.io/) (with built-in [DataLoader Implementation](https://github.com/prisma/prisma/blob/master/src/packages/client/src/runtime/Dataloader.ts) to handle **N+1**)
+- [x] [Prisma2](https://www.prisma.io/)
 - [x] [Directives](src/directives/string.ts) (For more useful directives, see [here](https://github.com/linbudu599/GraphQL-Explorer-Server/tree/master/server/directives))
 - [x] [AuthChecker](src/utils/authChecker.ts)
 - [x] [Plugins](src/plugins/complexity.ts)
 - [x] GraphQL Helper
   - [x] [GraphQL-Voyager](https://github.com/APIs-guru/graphql-voyager)
   - [x] [GraphDoc](https://github.com/2fd/graphdoc)
-  - [x] [GraphQL-Code-Generator](https://github.com/dotansimha/graphql-code-generator)
-
-
-### Recommended Tools
-
-- [TypeGraphQL-DataLoader](https://github.com/slaypni/type-graphql-dataloader) TypeGraphQL + TypeORM + DataLoader Integration.
-- [GenQL](https://github.com/remorses/genql) GraphQL Query Builder.
-- [GraphQL-Code-Generator](https://github.com/dotansimha/graphql-code-generator) Generate TypeScript Type Definition From GraphQL Schema / Operations.
+  - [x] [GraphQL-Code-Generator](https://github.com/dotansimha/graphql-code-generator) Generate TypeScript Type Definition From GraphQL Schema / Operations.
+  - [x] [GenQL](https://github.com/remorses/genql) Type-Safe GraphQL Query Builder.
 
 ### Dev
 
 - [x] CI: [GitHub Actions](.github/workflows/server.yml)
   - CD: Use [ssh-deploy](https://github.com/easingthemes/ssh-deploy).
-- [ ] Component Generator (Experimental for `mw gen` command)
 - [x] [CommitLint](.commitlintrc.js)
 - [x] Git Hooks
 
@@ -45,10 +38,24 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
 npm install
 # Develop
 npm run dev
+
 # Start Server
 npm run start
+
 # Stop Server
 npm run stop
+
+# Make sure server is running at port 7001
+# Commands below requires server to be active
+
+# Generate TypeScript Type-Definition from GraphQL Schema
+npm run codegen
+
+# Generate and Serve docs
+npm run docs
+
+# Start GraphQL Voyager
+npm run voyager
 ```
 
 If you donot want Prisma in your application, just:

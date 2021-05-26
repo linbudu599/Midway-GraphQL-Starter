@@ -16,3 +16,5 @@ typings
 /src/prisma/client
 *.sqlite
 .env.dev
+/documentation
+/generated
