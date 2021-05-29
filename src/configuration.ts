@@ -17,7 +17,7 @@ import * as orm from '@midwayjs/orm';
 
 dotenv.config({
   path: ['development', 'local'].includes(process.env.NODE_ENV)
-    ? path.resolve(process.cwd(), '.env.dev')
+    ? path.resolve(process.cwd(), '.env')
     : path.resolve(process.cwd(), '.env.prod'),
 });
 
