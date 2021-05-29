@@ -1,19 +1,19 @@
-import path from 'path';
-import { Configuration, App } from '@midwayjs/decorator';
-import { ILifeCycle } from '@midwayjs/core';
-import { IMidwayKoaApplication } from '@midwayjs/koa';
-import { getConnection } from 'typeorm';
+ path  'path';
+ { Configuration, App }  '@midwayjs/decorator';
+ { ILifeCycle }  '@midwayjs/core';
+ { IMidwayKoaApplication }  '@midwayjs/koa';
+ { getConnection }  'typeorm';
 
-import dotenv from 'dotenv';
+ dotenv  'dotenv';
 
-import { createMockUserData } from './utils/mock';
-import { defaultPagination } from './utils/constants';
-import { infoLog } from './utils/helper';
+ { createMockUserData }  './utils/mock';
+ { defaultPagination }  './utils/constants';
+ { infoLog }  './utils/helper';
 
 // eslint-disable-next-line node/no-unpublished-import
-import { PrismaClient } from './prisma/client';
+ { PrismaClient }  './prisma/client';
 
-import * as orm from '@midwayjs/orm';
+ *  orm  '@midwayjs/orm';
 
 dotenv.config({
   path: ['development', 'local'].includes(process.env.NODE_ENV)
@@ -21,24 +21,24 @@ dotenv.config({
     : path.resolve(process.cwd(), '.env.prod'),
 });
 
-const client = new PrismaClient();
+ client = PrismaClient();
 
-@Configuration({
+({
   imports: [orm],
   importConfigs: ['./config'],
 })
-export class ContainerConfiguration implements ILifeCycle {
-  @App()
+  ContainerConfiguration implements ILifeCycle {
+  ()
   app: IMidwayKoaApplication;
 
-  async onReady(): Promise<void> {
-    // setup prisma connection and inject into Midway runtime container
+   onReady(): Promisevoid {
+    // setup prisma connection inject Midway runtime container
     client.$connect();
     this.app.getApplicationContext().registerObject('prisma', client);
 
     // Prisma Mock Data Seeding
-    await client.prismaSampleModel.create({
-      data: {
+     client.prismaSampleModel.create({
+       {
         version: 2,
       },
     });
@@ -52,20 +52,20 @@ export class ContainerConfiguration implements ILifeCycle {
     // this.app.use(await this.app.generateMiddleware('RateLimitMiddleware'));
     this.app.use(await this.app.generateMiddleware('StaticMiddleware'));
 
-    // Inject Shared Application Data Here
+    // Inject Shared Application Here
     this.app
       .getApplicationContext()
       .registerObject('pagination', defaultPagination);
 
     // TypeORM Mock Data Seeding
-    const connection = getConnection();
+     connection = getConnection();
 
     infoLog(`[ TypeORM ] connection [${connection.name}] established`);
-    await createMockUserData();
+     createMockUserData();
     infoLog('[ TypeORM ] Mock Data Inserted');
   }
 
-  async onStop(): Promise<void> {
+   onStop(): Promisevoid {
     client.$disconnect();
   }
 }
