@@ -1,11 +1,4 @@
-import {
-  Field,
-  ID,
-  ObjectType,
-  InputType,
-  Int,
-  InterfaceType,
-} from 'type-graphql';
+import { Field, ID, InputType, Int, InterfaceType } from 'type-graphql';
 
 import {
   IsInt,

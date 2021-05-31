@@ -1,9 +1,9 @@
-import { Init, Provide } from '@midwayjs/decorator';
+import { Provide } from '@midwayjs/decorator';
 import { InjectEntityModel, InjectEntityManager } from '@midwayjs/orm';
 import { Repository, EntityManager, SelectQueryBuilder } from 'typeorm';
 
 import User from '../entities/User.entity';
-import { CreateUserInput, UpdateUserInput } from '../dto/user.dto';
+import { UserCreateInput, UserUpdateInput } from '../graphql/user.type';
 
 @Provide()
 export class UserService {
@@ -43,11 +43,11 @@ export class UserService {
     return await this.userModel.findOne(id);
   }
 
-  async createUser(user: CreateUserInput): Promise<User> {
+  async createUser(user: UserCreateInput): Promise<User> {
     return await this.userModel.save(user);
   }
 
-  async updateUser(user: UpdateUserInput): Promise<User> {
+  async updateUser(user: UserUpdateInput): Promise<User> {
     await this.userModel.update(user.id, user);
     return await this.getUserById(user.id);
   }

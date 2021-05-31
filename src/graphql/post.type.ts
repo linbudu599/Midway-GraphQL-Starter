@@ -1,12 +1,12 @@
 import {
   Field,
   ID,
-  ObjectType,
   InputType,
   Int,
   InterfaceType,
   Directive,
 } from 'type-graphql';
+import { IsInt, IsString } from 'class-validator';
 
 import { IUser } from './user.type';
 
@@ -23,7 +23,7 @@ export abstract class IPost {
   content: string;
 
   @Field(type => IUser, { nullable: true })
-  author: IUser;
+  author?: IUser;
 
   @Field(() => Int, { nullable: true })
   authorId?: number;
@@ -33,4 +33,34 @@ export abstract class IPost {
 
   @Field(type => Date)
   updateDate!: Date;
+}
+
+@InputType()
+export class PostCreateInput {
+  @Field()
+  @IsString()
+  title?: string;
+
+  @Field()
+  @IsString()
+  content?: string;
+
+  @Field()
+  @IsInt()
+  authorId: number;
+}
+
+@InputType()
+export class PostUpdateInput {
+  @Field()
+  @IsInt()
+  postId: number;
+
+  @Field()
+  @IsString()
+  title?: string;
+
+  @Field()
+  @IsString()
+  content?: string;
 }

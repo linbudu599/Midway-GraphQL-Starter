@@ -57,6 +57,18 @@ type Post implements IPost {
   updateDate: DateTime!
 }
 
+input PostCreateInput {
+  authorId: Float!
+  content: String!
+  title: String!
+}
+
+input PostUpdateInput {
+  content: String!
+  postId: Float!
+  title: String!
+}
+
 type PrismaSample {
   createdAt: DateTime!
   id: ID!
