@@ -18,8 +18,8 @@ import {
   Min,
 } from 'class-validator';
 
-import Profile from '../entities/Profile.entity';
-import Post from '../entities/Post.entity';
+import { IProfile } from './profile.type';
+import { IPost } from './post.type';
 
 @InterfaceType()
 export abstract class IUser {
@@ -29,14 +29,14 @@ export abstract class IUser {
   @Field()
   name!: string;
 
-  @Field(type => Profile, { nullable: true })
-  profile?: Profile;
+  @Field(type => IProfile, { nullable: true })
+  profile?: IProfile;
 
   @Field(() => Int, { nullable: true })
   profileId?: number;
 
-  @Field(type => [Post]!, { nullable: true })
-  posts!: Post[];
+  @Field(type => [IPost]!, { nullable: true })
+  posts!: IPost[];
 
   @Field(() => [Int], { nullable: true })
   postsIds?: number[];
@@ -53,7 +53,7 @@ export class UserCreateInput {
   @Field()
   @IsString()
   @Length(2, 10)
-  name!: string;
+  name: string;
 }
 
 @InputType()
@@ -61,7 +61,7 @@ export class UserUpdateInput {
   @IsNumber()
   @IsPositive()
   @Field(type => Int)
-  id!: number;
+  id: number;
 
   @Field()
   @IsString()

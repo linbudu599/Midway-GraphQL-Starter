@@ -1,0 +1,17 @@
+mutation {
+  CreateUser(createParams: { name: "林不渡" }) {
+    id
+    name
+  }
+  UpdateUser(updateParams: { id: 11, name: "我就是林不渡" }) {
+    id
+    name
+  }
+
+  CreateProfile(description: "dfsfsdfds") {
+    description
+  }
+  UpdateProfile(updateParams: { id: 1, description: "dsaasd" }) {
+    description
+  }
+}

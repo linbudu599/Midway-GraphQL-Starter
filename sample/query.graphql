@@ -16,4 +16,24 @@ query {
     createDate
     updateDate
   }
+
+  GetUserById(id: 1) {
+    id
+  }
+
+
+
+  GetAllProfiles {
+    profileId
+    description
+    userId
+    user {
+      name
+    }
+  }
+
+  GetProfileById(id: 1) {
+    profileId
+    description
+  }
 }

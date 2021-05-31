@@ -9,9 +9,9 @@ export interface IDefaultPagination {
   take: number;
 }
 
-export const defaultPagination = {
+export const defaultPagination: IDefaultPagination = {
   offset: 0,
-  take: 10,
+  take: 20,
 };
 
 export const MAX_ALLOWED_COMPLEXITY = 20;

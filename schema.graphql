@@ -8,10 +8,6 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 """
 scalar DateTime
 
-input DeleteProfileInput {
-  id: Int!
-}
-
 interface IPost {
   author: IUser
   authorId: Int
@@ -27,6 +23,7 @@ interface IProfile {
   description: String!
   profileId: ID!
   updateDate: DateTime!
+  user: IUser
   userId: Int
 }
 
@@ -34,15 +31,18 @@ interface IUser {
   createDate: DateTime!
   id: ID!
   name: String!
-  posts: [Post!]
+  posts: [IPost!]
   postsIds: [Int!]
-  profile: Profile
+  profile: IProfile
   profileId: Int
   updateDate: DateTime!
 }
 
 type Mutation {
+  CreateProfile(description: String!): Profile!
   CreateUser(createParams: UserCreateInput!): User
+  DeleteProfile(id: Int!): Profile!
+  DeleteUser(id: Int!): User
   UpdateProfile(updateParams: UpdateProfileInput!): Profile!
   UpdateUser(updateParams: UserUpdateInput!): User
 }
@@ -68,10 +68,12 @@ type Profile implements IProfile {
   description: String!
   profileId: ID!
   updateDate: DateTime!
+  user: IUser
   userId: Int
 }
 
 type Query {
+  GetAllProfiles: [Profile!]!
   GetAllUsers(pagination: UserPaginationInput): [User!]!
   GetProfileById(id: Int!): Profile!
   GetUserById(id: Int!): User
@@ -79,6 +81,7 @@ type Query {
 }
 
 input UpdateProfileInput {
+  description: String!
   id: Int!
 }
 
@@ -86,9 +89,9 @@ type User implements IUser {
   createDate: DateTime!
   id: ID!
   name: String!
-  posts: [Post!]
+  posts: [IPost!]
   postsIds: [Int!]
-  profile: Profile
+  profile: IProfile
   profileId: Int
   updateDate: DateTime!
 }

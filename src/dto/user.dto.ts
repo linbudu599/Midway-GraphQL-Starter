@@ -21,7 +21,7 @@ export class UpdateUserInput {
   id: number;
 
   @Rule(RuleType.string().required().min(2).max(10))
-  name: string;
+  name?: string;
 }
 
 export class UserPaginationInput {

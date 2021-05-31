@@ -69,6 +69,13 @@ export default class UserResolver {
   async UpdateUser(
     @Arg('updateParams', type => UserUpdateInput) updateParams: UserUpdateInput
   ): Promise<User> {
-    return await this.UpdateUser(updateParams);
+    return await this.userService.updateUser(updateParams);
+  }
+
+  @Mutation(returns => User, { nullable: true })
+  async DeleteUser(@Arg('id', type => Int) id: number): Promise<User> {
+    const user = await this.GetUserById(id);
+    await this.userService.deleteUser(id);
+    return user;
   }
 }
