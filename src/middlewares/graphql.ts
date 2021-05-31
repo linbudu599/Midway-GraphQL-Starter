@@ -33,6 +33,12 @@ import {
 import { AuthDirective } from '../directives/auth';
 import { DateFormatDirective } from '../directives/dateFormat';
 import { FetchDirective } from '../directives/fetch';
+import {
+  MaxLengthDirective,
+  MinLengthDirective,
+  GreaterThanDirective,
+  LessThanDirective,
+} from '../directives/restriction';
 
 @Provide('GraphQLMiddleware')
 export class GraphqlMiddleware implements IWebMiddleware {
@@ -67,10 +73,10 @@ export class GraphqlMiddleware implements IWebMiddleware {
       snake: SnakeCaseDirective,
       trim: TrimDirective,
       // restriction directives
-      // max: MaxLengthDirective,
-      // min: MinLengthDirective,
-      // greater: GreaterThanDirective,
-      // less: LessThanDirective,
+      max: MaxLengthDirective,
+      min: MinLengthDirective,
+      greater: GreaterThanDirective,
+      less: LessThanDirective,
     });
 
     const server = new ApolloServer({
