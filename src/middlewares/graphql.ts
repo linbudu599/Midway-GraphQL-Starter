@@ -20,7 +20,19 @@ import { InterceptorOnSpecificUser } from '../interceptors/graphql.interceptor';
 
 import { extensionPlugin } from '../extensions/set-up-by-plugin';
 
-import { CapitalizeDirective } from '../directives/string';
+import {
+  UpperDirective,
+  LowerDirective,
+  CamelCaseDirective,
+  StartCaseDirective,
+  CapitalizeDirective,
+  KebabCaseDirective,
+  TrimDirective,
+  SnakeCaseDirective,
+} from '../directives/string';
+import { AuthDirective } from '../directives/auth';
+import { DateFormatDirective } from '../directives/dateFormat';
+import { FetchDirective } from '../directives/fetch';
 
 @Provide('GraphQLMiddleware')
 export class GraphqlMiddleware implements IWebMiddleware {
@@ -42,7 +54,23 @@ export class GraphqlMiddleware implements IWebMiddleware {
     });
 
     SchemaDirectiveVisitor.visitSchemaDirectives(schema, {
+      fetch: FetchDirective,
+      date: DateFormatDirective,
+      auth: AuthDirective,
+      // string transform directives
+      upper: UpperDirective,
+      lower: LowerDirective,
+      camel: CamelCaseDirective,
+      start: StartCaseDirective,
       capitalize: CapitalizeDirective,
+      kebab: KebabCaseDirective,
+      snake: SnakeCaseDirective,
+      trim: TrimDirective,
+      // restriction directives
+      // max: MaxLengthDirective,
+      // min: MinLengthDirective,
+      // greater: GreaterThanDirective,
+      // less: LessThanDirective,
     });
 
     const server = new ApolloServer({
