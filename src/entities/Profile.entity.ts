@@ -6,6 +6,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   BaseEntity,
+  RelationId,
 } from 'typeorm';
 
 import User from './User.entity';
@@ -26,6 +27,9 @@ export default class Profile extends BaseEntity implements IProfile {
     onDelete: 'SET NULL',
   })
   user: User;
+
+  @RelationId((profile: Profile) => profile.user)
+  userId?: number;
 
   @CreateDateColumn()
   createDate!: Date;

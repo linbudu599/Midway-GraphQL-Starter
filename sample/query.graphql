@@ -1,0 +1,19 @@
+query {
+  GetAllUsers {
+    id
+    name
+    postsIds
+    posts {
+      postId
+      title
+      content
+    }
+    profileId
+    profile {
+      profileId
+      description
+    }
+    createDate
+    updateDate
+  }
+}

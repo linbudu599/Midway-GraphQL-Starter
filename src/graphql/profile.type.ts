@@ -9,6 +9,9 @@ export abstract class IProfile {
   @Field()
   description: string;
 
+  @Field(() => Int, { nullable: true })
+  userId?: number;
+
   @Field(type => Date)
   createDate!: Date;
 

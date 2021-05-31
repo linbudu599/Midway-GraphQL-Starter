@@ -38,28 +38,28 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
 yarn
 
 # if prisma is nor removed, run this command tp generate prisma client
-yarn prisma
+npm run prisma
 
 # Develop
-yarn dev
+npm run dev
 
 # Start Server
-yarn start
+npm run start
 
 # Stop Server
-yarn stop
+npm run stop
 
 # Make sure server is running at port 7001
 # Commands below requires server to be active
 
 # Generate TypeScript Type-Definition from GraphQL Schema
-yarn codegen
+npm run codegen
 
 # Generate and Serve docs
-yarn docs
+npm run docs
 
 # Start GraphQL Voyager
-yarn voyager
+npm run voyager
 ```
 
 If you donot want Prisma in your application, just:
@@ -91,6 +91,6 @@ If you donot want Prisma in your application, just:
 
 First time to try [Prisma](https://www.prisma.io/) ？ Just try:
 
-- `yarn prisma`, which include:
-  - `yarn prisma:generate`: Generate Prisma Client from [Prisma Schema](src/prisma/schema.prisma)
-  - `yarn prisma:push`: Gnerate SQLite Database with latest schema.
+- `npm run prisma`, which include:
+  - `npm run prisma:generate`: Generate Prisma Client from [Prisma Schema](src/prisma/schema.prisma)
+  - `npm run prisma:push`: Gnerate SQLite Database with latest schema.

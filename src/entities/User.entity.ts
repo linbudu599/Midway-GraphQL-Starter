@@ -8,6 +8,7 @@ import {
   BaseEntity,
   CreateDateColumn,
   UpdateDateColumn,
+  RelationId,
 } from 'typeorm';
 import { ObjectType } from 'type-graphql';
 
@@ -33,12 +34,18 @@ export default class User extends BaseEntity implements IUser {
   @JoinColumn()
   profile: Profile;
 
+  @RelationId((user: User) => user.profile)
+  profileId?: number;
+
   @OneToMany(type => Post, post => post.author, {
     onDelete: 'SET NULL',
     nullable: true,
     cascade: true,
   })
   posts: Post[];
+
+  @RelationId((user: User) => user.posts)
+  postsIds?: number[];
 
   @CreateDateColumn()
   createDate!: Date;

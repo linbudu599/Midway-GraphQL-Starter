@@ -8,6 +8,8 @@ import {
   Directive,
 } from 'type-graphql';
 
+import { IUser } from './user.type';
+
 @InterfaceType()
 export abstract class IPost {
   @Field(type => ID)
@@ -19,6 +21,12 @@ export abstract class IPost {
   @Directive('@capitalize')
   @Field()
   content: string;
+
+  @Field(type => IUser, { nullable: true })
+  author: IUser;
+
+  @Field(() => Int, { nullable: true })
+  authorId?: number;
 
   @Field(type => Date)
   createDate!: Date;

@@ -29,14 +29,20 @@ export abstract class IUser {
   @Field()
   name!: string;
 
-  @Field(type => Date)
-  createDate!: Date;
-
   @Field(type => Profile, { nullable: true })
   profile?: Profile;
 
+  @Field(() => Int, { nullable: true })
+  profileId?: number;
+
   @Field(type => [Post]!, { nullable: true })
   posts!: Post[];
+
+  @Field(() => [Int], { nullable: true })
+  postsIds?: number[];
+
+  @Field(type => Date)
+  createDate!: Date;
 
   @Field(type => Date)
   updateDate!: Date;

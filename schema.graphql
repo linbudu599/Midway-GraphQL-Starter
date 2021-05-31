@@ -13,6 +13,8 @@ input DeleteProfileInput {
 }
 
 interface IPost {
+  author: IUser
+  authorId: Int
   content: String!
   createDate: DateTime!
   postId: ID!
@@ -25,6 +27,7 @@ interface IProfile {
   description: String!
   profileId: ID!
   updateDate: DateTime!
+  userId: Int
 }
 
 interface IUser {
@@ -32,7 +35,9 @@ interface IUser {
   id: ID!
   name: String!
   posts: [Post!]
+  postsIds: [Int!]
   profile: Profile
+  profileId: Int
   updateDate: DateTime!
 }
 
@@ -43,6 +48,8 @@ type Mutation {
 }
 
 type Post implements IPost {
+  author: IUser
+  authorId: Int
   content: String!
   createDate: DateTime!
   postId: ID!
@@ -61,6 +68,7 @@ type Profile implements IProfile {
   description: String!
   profileId: ID!
   updateDate: DateTime!
+  userId: Int
 }
 
 type Query {
@@ -79,7 +87,9 @@ type User implements IUser {
   id: ID!
   name: String!
   posts: [Post!]
+  postsIds: [Int!]
   profile: Profile
+  profileId: Int
   updateDate: DateTime!
 }
 

@@ -6,6 +6,7 @@ import {
   BaseEntity,
   CreateDateColumn,
   UpdateDateColumn,
+  RelationId,
 } from 'typeorm';
 
 import User from './User.entity';
@@ -29,6 +30,9 @@ export default class Post extends BaseEntity implements IPost {
     onDelete: 'SET NULL',
   })
   author: User;
+
+  @RelationId((post: Post) => post.author)
+  authorId?: number;
 
   @CreateDateColumn()
   createDate!: Date;
