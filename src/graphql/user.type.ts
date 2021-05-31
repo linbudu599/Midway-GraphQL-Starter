@@ -17,10 +17,10 @@ import { IPost } from './post.type';
 @InterfaceType()
 export abstract class IUser {
   @Field(type => ID)
-  id!: number;
+  id: number;
 
   @Field()
-  name!: string;
+  name: string;
 
   @Field(type => IProfile, { nullable: true })
   profile?: IProfile;
@@ -29,16 +29,16 @@ export abstract class IUser {
   profileId?: number;
 
   @Field(type => [IPost]!, { nullable: true })
-  posts!: IPost[];
+  posts?: IPost[];
 
   @Field(() => [Int], { nullable: true })
   postsIds?: number[];
 
   @Field(type => Date)
-  createDate!: Date;
+  createDate: Date;
 
   @Field(type => Date)
-  updateDate!: Date;
+  updateDate: Date;
 }
 
 @InputType()

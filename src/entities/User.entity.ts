@@ -1,4 +1,5 @@
 import { EntityModel } from '@midwayjs/orm';
+import { ObjectType } from 'type-graphql';
 import {
   PrimaryGeneratedColumn,
   Column,
@@ -10,7 +11,6 @@ import {
   UpdateDateColumn,
   RelationId,
 } from 'typeorm';
-import { ObjectType } from 'type-graphql';
 
 import Profile from './Profile.entity';
 import Post from './Post.entity';
@@ -32,7 +32,7 @@ export default class User extends BaseEntity implements IUser {
     cascade: true,
   })
   @JoinColumn()
-  profile: Profile;
+  profile?: Profile;
 
   @RelationId((user: User) => user.profile)
   profileId?: number;
@@ -42,14 +42,14 @@ export default class User extends BaseEntity implements IUser {
     nullable: true,
     cascade: true,
   })
-  posts: Post[];
+  posts?: Post[];
 
   @RelationId((user: User) => user.posts)
-  postsIds?: number[];
+  postsIds: number[];
 
   @CreateDateColumn()
-  createDate!: Date;
+  createDate: Date;
 
   @UpdateDateColumn()
-  updateDate!: Date;
+  updateDate: Date;
 }

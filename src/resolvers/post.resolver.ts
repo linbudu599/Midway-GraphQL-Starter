@@ -21,38 +21,38 @@ export default class PostResolver {
   PostModel: Repository<Post>;
 
   @Inject()
-  PostService: PostService;
+  postService: PostService;
 
   @Query(returns => [Post])
   async GetAllPosts(@Ctx() context: IContext): Promise<Post[]> {
-    return await this.PostService.getAllPosts();
+    return await this.postService.getAllPosts();
   }
 
-  @Query(returns => Post)
+  @Query(returns => Post, { nullable: true })
   async GetPostById(@Arg('id', type => Int) id: number) {
-    return await this.PostService.getPostById(id);
+    return await this.postService.getPostById(id);
   }
 
-  @Mutation(returns => Post)
-  async CreatePost(
-    @Arg('createParams', type => PostCreateInput) createParams: PostCreateInput
-  ) {
-    return await this.PostService.createPost(createParams);
-  }
+  // @Mutation(returns => Post, { nullable: true })
+  // async CreatePost(@Arg('createParams', type => PostCreateInput) x: string) {
+  //   return await this.postService.createPost({
+  //     authorId: 1,
+  //   });
+  // }
 
-  @Mutation(returns => Post)
-  async UpdatePost(
-    @Arg('updateParams', type => PostUpdateInput)
-    updateParams: PostUpdateInput
-  ) {
-    return await this.PostService.updatePost(updateParams);
-  }
+  // @Mutation(returns => Post)
+  // async UpdatePost(
+  //   @Arg('updateParams', type => PostUpdateInput)
+  //   updateParams: PostUpdateInput
+  // ) {
+  //   return await this.postService.updatePost(updateParams);
+  // }
 
   @Mutation(returns => Post)
   async DeletePost(
     @Arg('id', type => Int)
     id: number
   ) {
-    return await this.PostService.deletePost(id);
+    return await this.postService.deletePost(id);
   }
 }

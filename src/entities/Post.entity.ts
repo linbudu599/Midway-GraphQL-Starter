@@ -1,4 +1,5 @@
 import { EntityModel } from '@midwayjs/orm';
+import { ObjectType } from 'type-graphql';
 import {
   PrimaryGeneratedColumn,
   Column,
@@ -12,7 +13,6 @@ import {
 import User from './User.entity';
 
 import { IPost } from '../graphql/post.type';
-import { ObjectType } from 'type-graphql';
 
 @ObjectType({ implements: IPost })
 @EntityModel()
@@ -35,8 +35,8 @@ export default class Post extends BaseEntity implements IPost {
   authorId?: number;
 
   @CreateDateColumn()
-  createDate!: Date;
+  createDate: Date;
 
   @UpdateDateColumn()
-  updateDate!: Date;
+  updateDate: Date;
 }

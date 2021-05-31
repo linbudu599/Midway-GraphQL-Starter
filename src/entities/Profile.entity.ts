@@ -1,4 +1,5 @@
 import { EntityModel } from '@midwayjs/orm';
+import { ObjectType } from 'type-graphql';
 import {
   PrimaryGeneratedColumn,
   Column,
@@ -12,7 +13,6 @@ import {
 import User from './User.entity';
 
 import { IProfile } from '../graphql/profile.type';
-import { ObjectType } from 'type-graphql';
 
 @ObjectType({ implements: IProfile })
 @EntityModel()
@@ -32,8 +32,8 @@ export default class Profile extends BaseEntity implements IProfile {
   userId?: number;
 
   @CreateDateColumn()
-  createDate!: Date;
+  createDate: Date;
 
   @UpdateDateColumn()
-  updateDate!: Date;
+  updateDate: Date;
 }

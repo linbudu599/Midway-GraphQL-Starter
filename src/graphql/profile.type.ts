@@ -18,14 +18,14 @@ export abstract class IProfile {
   user?: IUser;
 
   @Field(type => Date)
-  createDate!: Date;
+  createDate: Date;
 
   @Field(type => Date)
-  updateDate!: Date;
+  updateDate: Date;
 }
 
 @InputType()
-export class UpdateProfileInput {
+export class ProfileUpdateInput {
   @Field(type => Int)
   @IsInt()
   @IsPositive()

@@ -8,7 +8,7 @@ import { Repository } from 'typeorm';
 import Profile from '../entities/Profile.entity';
 import { ProfileService } from '../services/profile.service';
 
-import { UpdateProfileInput } from '../graphql/profile.type';
+import { ProfileUpdateInput } from '../graphql/profile.type';
 import { IContext } from '../typing';
 
 @Provide()
@@ -43,8 +43,8 @@ export default class ProfileResolver {
 
   @Mutation(returns => Profile)
   async UpdateProfile(
-    @Arg('updateParams', type => UpdateProfileInput)
-    { id, description }: UpdateProfileInput
+    @Arg('updateParams', type => ProfileUpdateInput)
+    { id, description }: ProfileUpdateInput
   ) {
     return await this.profileService.updateProfile(id, description);
   }

@@ -41,9 +41,10 @@ interface IUser {
 type Mutation {
   CreateProfile(description: String!): Profile!
   CreateUser(createParams: UserCreateInput!): User
+  DeletePost(id: Int!): Post!
   DeleteProfile(id: Int!): Profile!
   DeleteUser(id: Int!): User
-  UpdateProfile(updateParams: UpdateProfileInput!): Profile!
+  UpdateProfile(updateParams: ProfileUpdateInput!): Profile!
   UpdateUser(updateParams: UserUpdateInput!): User
 }
 
@@ -84,17 +85,19 @@ type Profile implements IProfile {
   userId: Int
 }
 
+input ProfileUpdateInput {
+  description: String!
+  id: Int!
+}
+
 type Query {
+  GetAllPosts: [Post!]!
   GetAllProfiles: [Profile!]!
   GetAllUsers(pagination: UserPaginationInput): [User!]!
+  GetPostById(id: Int!): Post
   GetProfileById(id: Int!): Profile!
   GetUserById(id: Int!): User
   PrismaSample: [PrismaSample!]!
-}
-
-input UpdateProfileInput {
-  description: String!
-  id: Int!
 }
 
 type User implements IUser {
