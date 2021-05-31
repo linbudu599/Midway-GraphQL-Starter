@@ -6,31 +6,36 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
 
 ## Features
 
-- [x] Basic Power of [MidwayJS](https://www.yuque.com/midwayjs/midway_v2)
-- [x] TypeORM
-- [x] SQLite3
-- [x] Middlewares (**Koa Implementation**): `compress` / `helmet` / `logger` / `static` / ...
+- Basic Power of [MidwayJS](https://www.yuque.com/midwayjs/midway_v2)
+- TypeORM / Prisma
+- SQLite3
+- GraphQL + DataLoader
+- Quick-Start Middlewares (**Koa Implementation**): `compress` / `helmet` / `logger` / `static` / ...
 
 ### GraphQL Related
 
 - [x] [Apollo-Server](https://www.apollographql.com/docs/apollo-server/)
 - [x] [TypeGraphQL](https://typegraphql.com/)
-- [x] [Prisma2](https://www.prisma.io/)
-- [x] [Directives](src/directives/string.ts) (For more useful directives, see [here](https://github.com/linbudu599/GraphQL-Explorer-Server/tree/master/server/directives))
+- [x] [Prisma 2](https://www.prisma.io/)
+- [x] [Directives](src/directives/)
 - [x] [AuthChecker](src/utils/authChecker.ts)
-- [x] [Plugins](src/plugins/complexity.ts)
+- [x] [Plugins](src/plugins/)
+- [ ] Extensions
 - [x] GraphQL Helper
   - [x] [GraphQL-Voyager](https://github.com/APIs-guru/graphql-voyager)
   - [x] [GraphDoc](https://github.com/2fd/graphdoc)
   - [x] [GraphQL-Code-Generator](https://github.com/dotansimha/graphql-code-generator) Generate TypeScript Type Definition From GraphQL Schema / Operations.
   - [x] [GenQL](https://github.com/remorses/genql) Type-Safe GraphQL Query Builder.
+- [ ] Example GraphQL Query/Mutation.
+- [ ] DataLoader Integration (With FieldResolver).
 
 ### Dev
 
 - [x] CI: [GitHub Actions](.github/workflows/server.yml)
-  - CD: Use [ssh-deploy](https://github.com/easingthemes/ssh-deploy).
+  - CD: By [ssh-deploy](https://github.com/easingthemes/ssh-deploy).
 - [x] [CommitLint](.commitlintrc.js)
 - [x] Git Hooks
+- [ ] Unit/Integration/E2E Tests
 
 ## Quick Start
 
