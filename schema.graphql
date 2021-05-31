@@ -39,11 +39,13 @@ interface IUser {
 }
 
 type Mutation {
+  CreatePost(createParams: PostCreateInput!): Post
   CreateProfile(description: String!): Profile!
   CreateUser(createParams: UserCreateInput!): User
   DeletePost(id: Int!): Post!
   DeleteProfile(id: Int!): Profile!
   DeleteUser(id: Int!): User
+  UpdatePost(updateParams: PostUpdateInput!): Post!
   UpdateProfile(updateParams: ProfileUpdateInput!): Profile!
   UpdateUser(updateParams: UserUpdateInput!): User
 }

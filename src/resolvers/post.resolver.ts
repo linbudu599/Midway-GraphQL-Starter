@@ -8,7 +8,7 @@ import { Repository } from 'typeorm';
 import Post from '../entities/Post.entity';
 import { PostService } from '../services/post.service';
 
-import { PostCreateInput, PostUpdateInput } from '../graphql/Post.type';
+import { PostCreateInput, PostUpdateInput } from '../graphql/post.type';
 import { IContext } from '../typing';
 
 @Provide()
@@ -33,20 +33,20 @@ export default class PostResolver {
     return await this.postService.getPostById(id);
   }
 
-  // @Mutation(returns => Post, { nullable: true })
-  // async CreatePost(@Arg('createParams', type => PostCreateInput) x: string) {
-  //   return await this.postService.createPost({
-  //     authorId: 1,
-  //   });
-  // }
+  @Mutation(returns => Post, { nullable: true })
+  async CreatePost(
+    @Arg('createParams', type => PostCreateInput) createParams: PostCreateInput
+  ) {
+    return await this.postService.createPost(createParams);
+  }
 
-  // @Mutation(returns => Post)
-  // async UpdatePost(
-  //   @Arg('updateParams', type => PostUpdateInput)
-  //   updateParams: PostUpdateInput
-  // ) {
-  //   return await this.postService.updatePost(updateParams);
-  // }
+  @Mutation(returns => Post)
+  async UpdatePost(
+    @Arg('updateParams', type => PostUpdateInput)
+    updateParams: PostUpdateInput
+  ) {
+    return await this.postService.updatePost(updateParams);
+  }
 
   @Mutation(returns => Post)
   async DeletePost(
