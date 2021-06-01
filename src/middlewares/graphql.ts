@@ -18,7 +18,8 @@ import { schemaPlugin, usagePlugin } from '../plugins/report';
 
 import { InterceptorOnSpecificUser } from '../interceptors/graphql.interceptor';
 
-import { extensionPlugin } from '../extensions/set-up-by-plugin';
+import { extensionPlugin } from '../extensions/apollo-plugin';
+import { CustomExtension } from '../extensions/graphql-extension';
 
 import {
   UpperDirective,
@@ -93,6 +94,21 @@ export class GraphqlMiddleware implements IWebMiddleware {
         complexityPlugin(schema),
         extensionPlugin(),
       ],
+      // deprecated!
+      // extensions: [() => new CustomExtension()],
+      introspection: true,
+      playground: {
+        settings: {
+          'editor.theme': 'dark',
+          'editor.reuseHeaders': true,
+          'editor.fontSize': 14,
+          'editor.fontFamily': '"Fira Code"',
+          'schema.polling.enable': true,
+          'schema.polling.interval': 5000,
+          'tracing.hideTracingResponse': false,
+          'queryPlan.hideQueryPlanResponse': false,
+        },
+      },
     });
     console.log('Apollo-GraphQL Invoke');
 
