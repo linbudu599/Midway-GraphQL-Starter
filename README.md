@@ -20,9 +20,11 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
 - [x] [Directives](src/directives/)
 - [x] [AuthChecker](src/utils/authChecker.ts)
 - [x] [Plugins](src/plugins/)
-- [ ] Extensions
+- [x] Extensions(**Deprecated Indeed**)
+- [ ] Scalars
 - [x] GraphQL Helper
   - [x] [GraphQL-Voyager](https://github.com/APIs-guru/graphql-voyager)
+  - [x] [GraphQL-Tools](https://www.graphql-tools.com)
   - [x] [GraphDoc](https://github.com/2fd/graphdoc)
   - [x] [GraphQL-Code-Generator](https://github.com/dotansimha/graphql-code-generator) Generate TypeScript Type Definition From GraphQL Schema / Operations.
   - [x] [GenQL](https://github.com/remorses/genql) Type-Safe GraphQL Query Builder.
@@ -31,8 +33,8 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
 
 ### Dev
 
-- [x] CI: [GitHub Actions](.github/workflows/server.yml)
-  - CD: By [ssh-deploy](https://github.com/easingthemes/ssh-deploy).
+- [x] [GitHub Actions](.github/workflows/server.yml)
+- [ ] Heroku
 - [x] [CommitLint](.commitlintrc.js)
 - [x] Git Hooks
 - [ ] Unit/Integration/E2E Tests
