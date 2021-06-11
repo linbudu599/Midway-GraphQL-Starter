@@ -7,10 +7,10 @@ export class MaxLengthScalarType extends GraphQLScalarType {
 
       serialize(value) {
         const serialized = type.serialize(value);
-        if (typeof value === `string` && value.length <= maxLength) {
+        if (typeof value === 'string' && value.length <= maxLength) {
           return serialized;
         }
-        if (typeof value === `number` && !isNaN(value) && value <= maxLength) {
+        if (typeof value === 'number' && !isNaN(value) && value <= maxLength) {
           return serialized;
         }
         throw new TypeError(`MaxLength Error: ${maxLength}`);

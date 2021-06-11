@@ -79,7 +79,8 @@
     "type-graphql": "^1.1.1",
     "type-graphql-dataloader": "^0.3.7",
     "typeorm": "^0.2.32",
-    "typeorm-seeding": "^1.6.1"
+    "typeorm-seeding": "^1.6.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@2fd/graphdoc": "^2.4.0",
@@ -106,6 +107,7 @@
     "@types/koa-static": "^4.0.1",
     "@types/lodash": "^4.14.170",
     "@types/node": "15",
+    "@types/uuid": "^8.3.0",
     "apollo-server-core": "^2.25.0",
     "chalk": "^4.1.1",
     "codecov": "^3.8.2",

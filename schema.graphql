@@ -98,9 +98,18 @@ type Query {
   GetAllUsers(pagination: UserPaginationInput): [User!]!
   GetPostById(id: Int!): Post
   GetProfileById(id: Int!): Profile!
+  GetSample: Sample!
   GetUserById(id: Int!): User
   PrismaSample: [PrismaSample!]!
 }
+
+type Sample {
+  sampleId: ID!
+  uuidProp: UUID!
+}
+
+"""uuid scalar type"""
+scalar UUID
 
 type User implements IUser {
   createDate: DateTime!
