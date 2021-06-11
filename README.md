@@ -22,6 +22,7 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
 - [x] [Plugins](src/plugins/)
 - [x] Extensions(**Deprecated Indeed**)
 - [ ] Scalars
+- [ ] File Uploads
 - [x] GraphQL Helper
   - [x] [GraphQL-Voyager](https://github.com/APIs-guru/graphql-voyager)
   - [x] [GraphQL-Tools](https://www.graphql-tools.com)
@@ -37,7 +38,7 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
 - [ ] Heroku
 - [x] [CommitLint](.commitlintrc.js)
 - [x] Git Hooks
-- [ ] Unit/Integration/E2E Tests
+- [ ] Tests
 
 ## Quick Start
 
@@ -69,7 +70,7 @@ npm run docs
 npm run voyager
 ```
 
-If you donot want Prisma in your application, just:
+If you donot want `Prisma` in your application, just:
 
 - Remove [prisma folder](src/prisma)
 - Remove prisma related lines in [configuration.ts](src/configuration.ts)

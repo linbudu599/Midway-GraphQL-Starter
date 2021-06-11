@@ -8,7 +8,8 @@
     "stop": "egg-scripts stop --title=my-midway-project",
     "start_build": "yarn build && cross-env NODE_ENV=development midway-bin dev",
     "dev": "cross-env ets && cross-env NODE_ENV=local midway-bin dev --ts",
-    "test": "midway-bin test",
+    "test": "jest --detectOpenHandles",
+    "test:watch": "jest --watch --detectOpenHandles",
     "cov": "midway-bin cov",
     "lint": "mwts check",
     "lint:fix": "mwts fix",
@@ -24,8 +25,7 @@
     "prisma:push": "prisma db push --schema ./src/prisma/schema.prisma",
     "prisma:migrate": "prisma migrate --preview-feature --schema ./src/prisma/schema.prisma",
     "commit": "git add -A && git-cz",
-    "codegen": "graphql-codegen --config codegen.yml",
-    "cypress": "cypress"
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "husky": {
     "hooks": {
@@ -108,10 +108,10 @@
     "@types/node": "15",
     "apollo-server-core": "^2.25.0",
     "chalk": "^4.1.1",
+    "codecov": "^3.8.2",
     "commitizen": "^4.2.4",
     "commitlint-config-cz": "^0.13.2",
     "cross-env": "^7.0.3",
-    "cypress": "^7.4.0",
     "cz-conventional-changelog": "^3.3.0",
     "cz-customizable": "^6.3.0",
     "fs-extra": "^10.0.0",
