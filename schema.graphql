@@ -3,6 +3,9 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+"""date scalar type"""
+scalar Date
+
 """
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
@@ -100,10 +103,11 @@ type Query {
   GetProfileById(id: Int!): Profile!
   GetUserById(id: Int!): User
   PrismaSample: [PrismaSample!]!
-  UUIDScalarQuery(uuid: UUID): Sample!
+  UUIDScalarQuery(date: Date, uuid: UUID): Sample!
 }
 
 type Sample {
+  dateProp: Date
   sampleId: ID!
   uuidProp: UUID
 }
