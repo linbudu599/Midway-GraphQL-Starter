@@ -9,6 +9,7 @@ import {
 } from 'type-graphql';
 
 import { UUIDScalar } from '../scalars/UUID';
+import { DateScalar } from '../scalars/Date';
 
 // This ObjectType is for displaying usages of:
 // scalars
@@ -21,6 +22,9 @@ export class Sample {
   @Field(type => ID)
   sampleId: number;
 
-  @Field(type => UUIDScalar)
+  @Field(type => UUIDScalar, { nullable: true })
   uuidProp: string;
+
+  @Field(type => DateScalar, { nullable: true })
+  dateProp: string;
 }

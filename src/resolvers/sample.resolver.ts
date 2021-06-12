@@ -7,6 +7,8 @@ import { IContext } from '../typing';
 
 import { v4 as uuidv4 } from 'uuid';
 
+import { UUIDScalar } from '../scalars/UUID';
+
 @Provide()
 @Resolver(of => Sample)
 export default class SampleResolver {
@@ -14,7 +16,10 @@ export default class SampleResolver {
   app: IMidwayKoaApplication;
 
   @Query(returns => Sample)
-  async GetSample(@Ctx() context: IContext): Promise<Sample> {
+  async UUIDScalarQuery(
+    @Arg('uuid', type => UUIDScalar, { nullable: true }) uuid: string
+  ) {
+    console.log('uuid: ', uuid);
     return {
       sampleId: 0,
       uuidProp: uuidv4(),

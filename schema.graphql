@@ -98,14 +98,14 @@ type Query {
   GetAllUsers(pagination: UserPaginationInput): [User!]!
   GetPostById(id: Int!): Post
   GetProfileById(id: Int!): Profile!
-  GetSample: Sample!
   GetUserById(id: Int!): User
   PrismaSample: [PrismaSample!]!
+  UUIDScalarQuery(uuid: UUID): Sample!
 }
 
 type Sample {
   sampleId: ID!
-  uuidProp: UUID!
+  uuidProp: UUID
 }
 
 """uuid scalar type"""
