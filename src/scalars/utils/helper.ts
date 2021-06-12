@@ -4,8 +4,7 @@ export function identity<T>(value: T): T {
   return value;
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export function ensureObject(value: any): object {
+export function ensureObject(value: any): Record<string, unknown> {
   if (typeof value !== 'object' || value === null || Array.isArray(value)) {
     throw new TypeError(
       `JSONObject cannot represent non-object value: ${value}`
