@@ -11,6 +11,7 @@ import {
   UpdateDateColumn,
   RelationId,
 } from 'typeorm';
+import { TypeormLoader } from 'type-graphql-dataloader';
 
 import Profile from './Profile.entity';
 import Post from './Post.entity';
@@ -32,6 +33,7 @@ export default class User extends BaseEntity implements IUser {
     cascade: true,
   })
   @JoinColumn()
+  @TypeormLoader()
   profile?: Profile;
 
   @RelationId((user: User) => user.profile)
@@ -42,6 +44,7 @@ export default class User extends BaseEntity implements IUser {
     nullable: true,
     cascade: true,
   })
+  @TypeormLoader()
   posts?: Post[];
 
   @RelationId((user: User) => user.posts)

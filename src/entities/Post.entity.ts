@@ -9,6 +9,7 @@ import {
   UpdateDateColumn,
   RelationId,
 } from 'typeorm';
+import { TypeormLoader } from 'type-graphql-dataloader';
 
 import User from './User.entity';
 
@@ -29,6 +30,7 @@ export default class Post extends BaseEntity implements IPost {
   @ManyToOne(() => User, user => user.id, {
     onDelete: 'SET NULL',
   })
+  @TypeormLoader()
   author: User;
 
   @RelationId((post: Post) => post.author)

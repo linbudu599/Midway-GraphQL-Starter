@@ -20,6 +20,7 @@ import { InterceptorOnSpecificUser } from '../interceptors/graphql.interceptor';
 
 import { extensionPlugin } from '../extensions/apollo-plugin';
 import { CustomExtension } from '../extensions/graphql-extension';
+import { ApolloServerLoaderPlugin } from 'type-graphql-dataloader';
 
 import {
   UpperDirective,
@@ -40,6 +41,7 @@ import {
   GreaterThanDirective,
   LessThanDirective,
 } from '../directives/restriction';
+import { getConnection } from 'typeorm';
 
 @Provide('GraphQLMiddleware')
 export class GraphqlMiddleware implements IWebMiddleware {
@@ -93,6 +95,9 @@ export class GraphqlMiddleware implements IWebMiddleware {
         usagePlugin(),
         complexityPlugin(schema),
         extensionPlugin(),
+        ApolloServerLoaderPlugin({
+          typeormGetConnection: getConnection, // for use with TypeORM
+        }),
       ],
       // deprecated!
       // extensions: [() => new CustomExtension()],

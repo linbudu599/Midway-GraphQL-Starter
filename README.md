@@ -21,7 +21,7 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
 - [x] [AuthChecker](src/utils/authChecker.ts)
 - [x] [Plugins](src/plugins/)
 - [x] Extensions(**Deprecated Indeed**)
-- [ ] Scalars
+- [x] Scalars
 - [ ] File Uploads
 - [x] GraphQL Helper
   - [x] [GraphQL-Voyager](https://github.com/APIs-guru/graphql-voyager)
@@ -30,12 +30,11 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
   - [x] [GraphQL-Code-Generator](https://github.com/dotansimha/graphql-code-generator) Generate TypeScript Type Definition From GraphQL Schema / Operations.
   - [x] [GenQL](https://github.com/remorses/genql) Type-Safe GraphQL Query Builder.
 - [ ] Example GraphQL Query/Mutation.
-- [ ] DataLoader Integration (With FieldResolver).
+- [x] DataLoader.
 
 ### Dev
 
 - [x] [GitHub Actions](.github/workflows/server.yml)
-- [ ] Heroku
 - [x] [CommitLint](.commitlintrc.js)
 - [x] Git Hooks
 - [ ] Tests
@@ -46,28 +45,28 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
 yarn
 
 # if prisma is nor removed, run this command tp generate prisma client
-npm run prisma
+yarn prisma
 
 # Develop
-npm run dev
+yarn dev
 
 # Start Server
-npm run start
+yarn start
 
 # Stop Server
-npm run stop
+yarn stop
 
 # Make sure server is running at port 7001
 # Commands below requires server to be active
 
 # Generate TypeScript Type-Definition from GraphQL Schema
-npm run codegen
+yarn codegen
 
 # Generate and Serve docs
-npm run docs
+yarn docs
 
 # Start GraphQL Voyager
-npm run voyager
+yarn voyager
 ```
 
 If you donot want `Prisma` in your application, just:
@@ -99,6 +98,6 @@ If you donot want `Prisma` in your application, just:
 
 First time to try [Prisma](https://www.prisma.io/) ？ Just try:
 
-- `npm run prisma`, which include:
-  - `npm run prisma:generate`: Generate Prisma Client from [Prisma Schema](src/prisma/schema.prisma)
-  - `npm run prisma:push`: Gnerate SQLite Database with latest schema.
+- `yarn prisma`, which include:
+  - `yarn prisma:generate`: Generate Prisma Client from [Prisma Schema](src/prisma/schema.prisma)
+  - `yarn prisma:push`: Gnerate SQLite Database with latest schema.

@@ -9,6 +9,7 @@ import {
   BaseEntity,
   RelationId,
 } from 'typeorm';
+import { TypeormLoader } from 'type-graphql-dataloader';
 
 import User from './User.entity';
 
@@ -26,6 +27,7 @@ export default class Profile extends BaseEntity implements IProfile {
   @OneToOne(type => User, user => user.profile, {
     onDelete: 'SET NULL',
   })
+  @TypeormLoader()
   user: User;
 
   @RelationId((profile: Profile) => profile.user)
