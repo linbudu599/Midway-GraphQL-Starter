@@ -7,9 +7,9 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
 ## Features
 
 - Basic Power of [MidwayJS](https://www.yuque.com/midwayjs/midway_v2)
-- TypeORM / Prisma
+- TypeORM / Prisma2
 - SQLite3
-- GraphQL + DataLoader
+- GraphQL(TypeGraphQL + Apollo-Server)
 - Quick-Start Middlewares (**Koa Implementation**): `compress` / `helmet` / `logger` / `static` / ...
 
 ### GraphQL Related
@@ -24,13 +24,42 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
 - [x] Scalars
 - [ ] File Uploads
 - [x] GraphQL Helper
-  - [x] [GraphQL-Voyager](https://github.com/APIs-guru/graphql-voyager)
-  - [x] [GraphQL-Tools](https://www.graphql-tools.com)
-  - [x] [GraphDoc](https://github.com/2fd/graphdoc)
+  - [x] [GraphQL-Voyager](https://github.com/APIs-guru/graphql-voyager) Represent any GraphQL API as an interactive graph.
+  - [x] [GraphQL-Tools](https://www.graphql-tools.com) Build, mock, and stitch a GraphQL schema using the schema language
+  - [x] [GraphDoc](https://github.com/2fd/graphdoc) Static page generator for documenting GraphQL Schema
   - [x] [GraphQL-Code-Generator](https://github.com/dotansimha/graphql-code-generator) Generate TypeScript Type Definition From GraphQL Schema / Operations.
   - [x] [GenQL](https://github.com/remorses/genql) Type-Safe GraphQL Query Builder.
 - [ ] Example GraphQL Query/Mutation.
 - [x] DataLoader.
+
+## Project Structure
+
+```text
+- dist                          ---------- built applications
+- documentation                 ---------- generated documentations by GraphDoc
+- logs                          ---------- application logs
+- sample                        ---------- sample GraphQL queries/mutations
+- src                           ---------- application source
+  - config                      ---------- application config
+  - controller                  ---------- application controllers
+  - decorators                  ---------- custom decorators
+  - directives                  ---------- custom GraphQL directives
+  - dto                         ---------- data transfer objects
+  - entities                    ---------- TypeORM entities
+  - extensions                  ---------- GraphQL extensions
+  - graphql                     ---------- GraphQL type definitions
+  - interceptors                ---------- REST/GraphQL interceptors
+  - middlewares                 ---------- middlewares
+  - plugins                     ---------- Apollo-Server plugins
+  - prisma                      ---------- Prisma
+  - resolvers                   ---------- TypeGraphQL resolvers
+  - scalars                     ---------- custom GraphQL scalars
+  - services                    ---------- application services
+  - utils                       ---------- utilities
+- test                          ---------- integration test cases
+- voyager                       ---------- GraphQL-Voyager html file
+- typings                       ---------- generated typings
+```
 
 ### Dev
 
@@ -44,7 +73,7 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
 ```bash
 yarn
 
-# if prisma is nor removed, run this command tp generate prisma client
+# if prisma is nor removed, it's required to run this command before start
 yarn prisma
 
 # Develop
@@ -56,8 +85,7 @@ yarn start
 # Stop Server
 yarn stop
 
-# Make sure server is running at port 7001
-# Commands below requires server to be active
+# Commands below requires server to be active at port 7001
 
 # Generate TypeScript Type-Definition from GraphQL Schema
 yarn codegen
@@ -68,6 +96,8 @@ yarn docs
 # Start GraphQL Voyager
 yarn voyager
 ```
+
+## Remove Prisma
 
 If you donot want `Prisma` in your application, just:
 
