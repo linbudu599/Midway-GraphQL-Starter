@@ -13,7 +13,7 @@ export const createEntityData = <T extends ClassType>(
 export const createMockUserData = async (): Promise<void> => {
   const users: User[] = [];
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 5; i++) {
     const mockUser = new User();
     mockUser.name = `User-${Math.floor(Math.random() * 1000)}`;
 

@@ -10,16 +10,19 @@ import { createMockUserData } from './utils/mock';
 import { defaultPagination } from './utils/constants';
 import { infoLog } from './utils/helper';
 
-// eslint-disable-next-line node/no-unpublished-import
 import { PrismaClient } from './prisma/client';
 
 import * as orm from '@midwayjs/orm';
 
+const envFilesPath = ['development', 'local'].includes(process.env.NODE_ENV)
+  ? path.resolve(process.cwd(), '.env')
+  : path.resolve(process.cwd(), '.env.prod');
+
 dotenv.config({
-  path: ['development', 'local'].includes(process.env.NODE_ENV)
-    ? path.resolve(process.cwd(), '.env')
-    : path.resolve(process.cwd(), '.env.prod'),
+  path: envFilesPath,
 });
+
+infoLog(`[ App ] Loading env file from ${envFilesPath}`);
 
 const client = new PrismaClient();
 
@@ -46,9 +49,9 @@ export class ContainerConfiguration implements ILifeCycle {
     this.app.use(await this.app.generateMiddleware('ResolveTimeMiddleware'));
     this.app.use(await this.app.generateMiddleware('GraphQLMiddleware'));
     // this.app.use(await this.app.generateMiddleware('HelmetMiddleware'));
-    this.app.use(await this.app.generateMiddleware('CompressMiddleware'));
+    // this.app.use(await this.app.generateMiddleware('CompressMiddleware'));
     this.app.use(await this.app.generateMiddleware('CORSMiddleware'));
-    this.app.use(await this.app.generateMiddleware('JSONPrettierMiddleware'));
+    // this.app.use(await this.app.generateMiddleware('JSONPrettierMiddleware'));
     // this.app.use(await this.app.generateMiddleware('RateLimitMiddleware'));
     this.app.use(await this.app.generateMiddleware('StaticMiddleware'));
 

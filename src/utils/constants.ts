@@ -14,4 +14,4 @@ export const defaultPagination: IDefaultPagination = {
   take: 20,
 };
 
-export const MAX_ALLOWED_COMPLEXITY = 20;
+export const MAX_ALLOWED_COMPLEXITY = 100;

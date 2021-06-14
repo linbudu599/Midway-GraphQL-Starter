@@ -12,12 +12,12 @@ export class PostService {
 
   async getAllPosts(): Promise<Post[]> {
     return await this.postModel.find({
-      relations: ['user'],
+      relations: ['author'],
     });
   }
 
   async getPostById(postId: number) {
-    return await this.postModel.findOne(postId, { relations: ['user'] });
+    return await this.postModel.findOne(postId, { relations: ['author'] });
   }
 
   async createPost(createParams: PostCreateInput): Promise<Post> {

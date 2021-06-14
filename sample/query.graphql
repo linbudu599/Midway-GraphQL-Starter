@@ -1,39 +1,65 @@
+fragment PostFields on Post {
+  __typename
+  postId
+  title
+  content
+  createDate
+  updateDate
+}
+
+fragment UserFields on User {
+  __typename
+  id
+  name
+  createDate
+  updateDate
+}
+
+fragment ProfileFields on Profile {
+  __typename
+  profileId
+  description
+  createDate
+}
+
 query {
   GetAllUsers {
-    id
-    name
-    postsIds
+    ...UserFields
     posts {
-      postId
-      title
-      content
+      ...PostFields
     }
-    profileId
     profile {
-      profileId
-      description
+      ...ProfileFields
     }
-    createDate
-    updateDate
   }
 
   GetUserById(id: 1) {
-    id
+    ...UserFields
+    profileId
+    postsIds
   }
 
-
-
   GetAllProfiles {
-    profileId
-    description
-    userId
+    ...ProfileFields
     user {
-      name
+      ...UserFields
     }
   }
 
   GetProfileById(id: 1) {
-    profileId
-    description
+    ...ProfileFields
+    userId
+  }
+
+  GetAllPosts {
+    ...PostFields
+    author {
+      ...UserFields
+    }
+  }
+
+  GetPostById(id:1){
+    ...PostFields
+    authorId
   }
 }

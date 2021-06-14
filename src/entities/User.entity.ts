@@ -1,5 +1,5 @@
 import { EntityModel } from '@midwayjs/orm';
-import { ObjectType } from 'type-graphql';
+import { ObjectType, Field } from 'type-graphql';
 import {
   PrimaryGeneratedColumn,
   Column,
@@ -27,24 +27,26 @@ export default class User extends BaseEntity implements IUser {
   @Column()
   name: string;
 
+  // @Field(() => Profile)
   @OneToOne(type => Profile, profile => profile.user, {
     onDelete: 'SET NULL',
     nullable: true,
-    cascade: true,
+    cascade: ['insert'],
   })
   @JoinColumn()
-  @TypeormLoader()
+  @TypeormLoader(() => Profile, (user: User) => user.profile)
   profile?: Profile;
 
   @RelationId((user: User) => user.profile)
   profileId?: number;
 
+  // @Field(() => [Post])
   @OneToMany(type => Post, post => post.author, {
     onDelete: 'SET NULL',
     nullable: true,
-    cascade: true,
+    cascade: ['insert'],
   })
-  @TypeormLoader()
+  @TypeormLoader(() => Post, (user: User) => user.posts)
   posts?: Post[];
 
   @RelationId((user: User) => user.posts)
