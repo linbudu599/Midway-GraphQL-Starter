@@ -5,6 +5,8 @@ import { IMidwayKoaApplication } from '@midwayjs/koa';
 import { getConnection } from 'typeorm';
 
 import dotenv from 'dotenv';
+import open from 'open';
+import { openBrowser } from './lib/open-browser';
 
 import { createMockUserData } from './utils/mock';
 import { defaultPagination } from './utils/constants';
@@ -66,6 +68,9 @@ export class ContainerConfiguration implements ILifeCycle {
     infoLog(`[ TypeORM ] connection [${connection.name}] established`);
     await createMockUserData();
     infoLog('[ TypeORM ] Mock Data Inserted');
+
+    // FIXME: Use non hard-coded URL
+    openBrowser('http://127.0.0.1:7001/graphql');
   }
 
   async onStop(): Promise<void> {

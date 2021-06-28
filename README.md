@@ -31,7 +31,7 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
   - [x] [GraphDoc](https://github.com/2fd/graphdoc) Static page generator for documenting GraphQL Schema
   - [x] [GraphQL-Code-Generator](https://github.com/dotansimha/graphql-code-generator) Generate TypeScript Type Definition From GraphQL Schema / Operations.
   - [x] [GenQL](https://github.com/remorses/genql) Type-Safe GraphQL Query Builder.
-- [ ] Example GraphQL Query/Mutation.
+- [x] Example GraphQL Query/Mutation.
 - [x] DataLoader.
 
 ## Project Structure

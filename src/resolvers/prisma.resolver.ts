@@ -13,7 +13,7 @@ export default class PrismaResolver {
   app: IMidwayKoaApplication;
 
   // In GraphQL Resolver, you can get prisma client instance by directly inject(@Inject)
-  // or inject to ApolloServer context, then get client @Ctx()
+  // or inject to ApolloServer context, then get client by @Ctx()
   @Inject('prisma')
   prisma: PrismaClient;
 
