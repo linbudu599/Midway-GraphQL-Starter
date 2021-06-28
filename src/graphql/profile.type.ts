@@ -33,6 +33,6 @@ export class ProfileUpdateInput {
 
   @Field()
   @IsString()
-  @Length(2, 10)
+  @Length(2, 30)
   description: string;
 }

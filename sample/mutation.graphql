@@ -1,17 +1,55 @@
-mutation {
-  CreateUser(createParams: { name: "林不渡" }) {
-    id
-    name
+fragment PostFields on Post {
+  __typename
+  postId
+  title
+  content
+  createDate
+  updateDate
+}
+
+fragment UserFields on User {
+  __typename
+  id
+  name
+  createDate
+  updateDate
+}
+
+fragment ProfileFields on Profile {
+  __typename
+  profileId
+  description
+  createDate
+}
+
+mutation SampleMutation {
+  CreateUser(createParams: { name: "林不渡-599" }) {
+    ...UserFields
   }
-  UpdateUser(updateParams: { id: 11, name: "我就是林不渡" }) {
-    id
-    name
+  UpdateUser(updateParams: { id: 1, name: "UPDATED_林不渡" }) {
+    ...UserFields
+  }
+  DeleteUser(id: 9999) {
+    ...UserFields
   }
 
-  CreateProfile(description: "dfsfsdfds") {
-    description
+  CreatePost(createParams: { title: "我直接芜湖", authorId: 6 }) {
+    ...PostFields
   }
-  UpdateProfile(updateParams: { id: 1, description: "dsaasd" }) {
-    description
+  UpdatePost(updateParams: { postId: 6, title: "UPDATED_我直接芜湖" }) {
+    ...PostFields
+  }
+  DeletePost(id: 6) {
+    ...PostFields
+  }
+
+  CreateProfile(description:"Story starts..."){
+    ...ProfileFields
+  }
+  UpdateProfile(updateParams:{id:6,description:"UPDATED_Story starts..."}){
+    ...ProfileFields
+  }
+  DeleteProfile(id:6){
+    ...ProfileFields
   }
 }

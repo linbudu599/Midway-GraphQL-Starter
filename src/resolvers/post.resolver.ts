@@ -40,7 +40,7 @@ export default class PostResolver {
     return await this.postService.createPost(createParams);
   }
 
-  @Mutation(returns => Post)
+  @Mutation(returns => Post, { nullable: true })
   async UpdatePost(
     @Arg('updateParams', type => PostUpdateInput)
     updateParams: PostUpdateInput
@@ -48,11 +48,13 @@ export default class PostResolver {
     return await this.postService.updatePost(updateParams);
   }
 
-  @Mutation(returns => Post)
+  @Mutation(returns => Post, { nullable: true })
   async DeletePost(
     @Arg('id', type => Int)
     id: number
   ) {
-    return await this.postService.deletePost(id);
+    const post = await this.GetPostById(id);
+    await this.postService.deletePost(id);
+    return post;
   }
 }

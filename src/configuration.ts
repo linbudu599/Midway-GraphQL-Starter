@@ -70,6 +70,7 @@ export class ContainerConfiguration implements ILifeCycle {
     infoLog('[ TypeORM ] Mock Data Inserted');
 
     // FIXME: Use non hard-coded URL
+    // FIXME: Avtive existed tab instead of opening another one
     openBrowser('http://127.0.0.1:7001/graphql');
   }
 

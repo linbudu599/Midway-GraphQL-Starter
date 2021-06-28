@@ -58,7 +58,7 @@ export class UserUpdateInput {
 
   @Field()
   @IsString()
-  @Length(2, 10)
+  @Length(2, 30)
   @IsOptional()
   name?: string;
 }

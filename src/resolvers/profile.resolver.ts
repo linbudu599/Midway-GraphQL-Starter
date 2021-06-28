@@ -33,7 +33,7 @@ export default class ProfileResolver {
     return await this.profileService.getProfileById(id);
   }
 
-  @Mutation(returns => Profile)
+  @Mutation(returns => Profile, { nullable: true })
   async CreateProfile(
     @Arg('description')
     description: string
@@ -41,7 +41,7 @@ export default class ProfileResolver {
     return await this.profileService.createProfile(description);
   }
 
-  @Mutation(returns => Profile)
+  @Mutation(returns => Profile, { nullable: true })
   async UpdateProfile(
     @Arg('updateParams', type => ProfileUpdateInput)
     { id, description }: ProfileUpdateInput
@@ -49,11 +49,13 @@ export default class ProfileResolver {
     return await this.profileService.updateProfile(id, description);
   }
 
-  @Mutation(returns => Profile)
+  @Mutation(returns => Profile, { nullable: true })
   async DeleteProfile(
     @Arg('id', type => Int)
     id: number
   ) {
-    return await this.profileService.deleteProfile(id);
+    const profile = await this.GetProfileById(id);
+    await this.profileService.deleteProfile(id);
+    return profile;
   }
 }

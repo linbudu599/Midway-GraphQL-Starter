@@ -19,8 +19,8 @@ export abstract class IPost {
   title: string;
 
   @Directive('@capitalize')
-  @Field()
-  content: string;
+  @Field({ nullable: true })
+  content?: string;
 
   @Field(type => IUser, { nullable: true })
   author?: IUser;
@@ -39,9 +39,9 @@ export abstract class IPost {
 export class PostCreateInput {
   @Field()
   @IsString()
-  title?: string;
+  title: string;
 
-  @Field()
+  @Field({ nullable: true })
   @IsString()
   content?: string;
 
@@ -56,11 +56,11 @@ export class PostUpdateInput {
   @IsInt()
   postId: number;
 
-  @Field()
+  @Field({ nullable: true })
   @IsString()
   title?: string;
 
-  @Field()
+  @Field({ nullable: true })
   @IsString()
   content?: string;
 }

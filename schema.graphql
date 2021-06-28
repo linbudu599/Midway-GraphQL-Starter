@@ -14,7 +14,7 @@ scalar DateTime
 interface IPost {
   author: IUser
   authorId: Int
-  content: String!
+  content: String
   createDate: DateTime!
   postId: ID!
   title: String!
@@ -43,20 +43,20 @@ interface IUser {
 
 type Mutation {
   CreatePost(createParams: PostCreateInput!): Post
-  CreateProfile(description: String!): Profile!
+  CreateProfile(description: String!): Profile
   CreateUser(createParams: UserCreateInput!): User
-  DeletePost(id: Int!): Post!
-  DeleteProfile(id: Int!): Profile!
+  DeletePost(id: Int!): Post
+  DeleteProfile(id: Int!): Profile
   DeleteUser(id: Int!): User
-  UpdatePost(updateParams: PostUpdateInput!): Post!
-  UpdateProfile(updateParams: ProfileUpdateInput!): Profile!
+  UpdatePost(updateParams: PostUpdateInput!): Post
+  UpdateProfile(updateParams: ProfileUpdateInput!): Profile
   UpdateUser(updateParams: UserUpdateInput!): User
 }
 
 type Post implements IPost {
   author: IUser
   authorId: Int
-  content: String!
+  content: String
   createDate: DateTime!
   postId: ID!
   title: String!
@@ -65,14 +65,14 @@ type Post implements IPost {
 
 input PostCreateInput {
   authorId: Float!
-  content: String!
+  content: String
   title: String!
 }
 
 input PostUpdateInput {
-  content: String!
+  content: String
   postId: Float!
-  title: String!
+  title: String
 }
 
 type PrismaSample {
