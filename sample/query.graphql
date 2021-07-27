@@ -58,7 +58,7 @@ query SampleQuery {
     }
   }
 
-  GetPostById(id:1){
+  GetPostById(id: 1) {
     ...PostFields
     authorId
   }
