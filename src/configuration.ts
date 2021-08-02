@@ -77,7 +77,7 @@ export class ContainerConfiguration implements ILifeCycle {
 
     // FIXME: Use non hard-coded URL
     // FIXME: Avtive existed tab instead of opening another one
-    openBrowser('http://127.0.0.1:7001/graphql');
+    // openBrowser('http://127.0.0.1:7001/graphql');
   }
 
   async onStop(): Promise<void> {

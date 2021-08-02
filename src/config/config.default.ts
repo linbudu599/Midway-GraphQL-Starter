@@ -43,13 +43,3 @@ export default (appInfo: EggAppInfo) => {
 
   return config;
 };
-
-// export const orm = {
-//   type: 'sqlite',
-//   name: 'default',
-//   database: 'db.sqlite',
-//   synchronize: true,
-//   dropSchema: true,
-//   logger: 'advanced-console',
-//   entities: ['./entities/*'],
-// };

@@ -1,4 +1,3 @@
-import { PluginDefinition } from 'apollo-server-core';
 import {
   GraphQLRequestContext,
   GraphQLRequestContextDidEncounterErrors,
@@ -10,12 +9,13 @@ import {
   GraphQLRequestContextValidationDidStart,
   GraphQLRequestContextWillSendResponse,
   GraphQLServiceContext,
+  ApolloServerPlugin,
 } from 'apollo-server-plugin-base';
 
 import { IContext } from '../typing';
 
 // All supported plugin lifecycle are listed here
-const PluginLifecycleSkeleton: PluginDefinition = {
+const PluginLifecycleSkeleton: ApolloServerPlugin = {
   async serverWillStart(service: GraphQLServiceContext) {
     return {
       serverWillStop: async () => {},

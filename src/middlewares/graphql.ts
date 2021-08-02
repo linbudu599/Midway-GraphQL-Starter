@@ -20,6 +20,7 @@ import ResolveTimeMiddleware from './resolve-time.graphql';
 
 import complexityPlugin from '../plugins/complexity';
 import { schemaPlugin, usagePlugin } from '../plugins/report';
+import { cachePlugin } from '../plugins/cache';
 
 import { InterceptorOnSpecificUser } from '../interceptors/graphql.interceptor';
 
@@ -72,25 +73,25 @@ export class GraphqlMiddleware implements IWebMiddleware {
         globalMiddlewares: [ResolveTimeMiddleware, InterceptorOnSpecificUser],
       });
 
-      // SchemaDirectiveVisitor.visitSchemaDirectives(schema, {
-      //   fetch: FetchDirective,
-      //   date: DateFormatDirective,
-      //   auth: AuthDirective,
-      //   // string transform directives
-      //   upper: UpperDirective,
-      //   lower: LowerDirective,
-      //   camel: CamelCaseDirective,
-      //   start: StartCaseDirective,
-      //   capitalize: CapitalizeDirective,
-      //   kebab: KebabCaseDirective,
-      //   snake: SnakeCaseDirective,
-      //   trim: TrimDirective,
-      //   // restriction directives
-      //   max: MaxLengthDirective,
-      //   min: MinLengthDirective,
-      //   greater: GreaterThanDirective,
-      //   less: LessThanDirective,
-      // });
+      SchemaDirectiveVisitor.visitSchemaDirectives(schema, {
+        fetch: FetchDirective,
+        date: DateFormatDirective,
+        auth: AuthDirective,
+        // string transform directives
+        upper: UpperDirective,
+        lower: LowerDirective,
+        camel: CamelCaseDirective,
+        start: StartCaseDirective,
+        capitalize: CapitalizeDirective,
+        kebab: KebabCaseDirective,
+        snake: SnakeCaseDirective,
+        trim: TrimDirective,
+        // restriction directives
+        max: MaxLengthDirective,
+        min: MinLengthDirective,
+        greater: GreaterThanDirective,
+        less: LessThanDirective,
+      });
 
       const server = new ApolloServer({
         schema,
@@ -101,11 +102,10 @@ export class GraphqlMiddleware implements IWebMiddleware {
           container,
         } as IContext,
         plugins: [
-          // schemaPlugin(),
-          // usagePlugin(),
+          schemaPlugin(),
+          usagePlugin(),
           complexityPlugin(schema),
-          // FIXME: Extension Migration
-          // extensionPlugin(),
+          cachePlugin(true, {}),
           // FIXME: DataLoader Integration
           // ApolloServerLoaderPlugin({
           //   typeormGetConnection: getConnection, // for use with TypeORM

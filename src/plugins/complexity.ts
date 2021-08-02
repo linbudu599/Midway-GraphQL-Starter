@@ -1,6 +1,8 @@
 import { GraphQLSchema } from 'graphql';
-import { PluginDefinition } from 'apollo-server-core';
-import { GraphQLRequestContext } from 'apollo-server-plugin-base';
+import {
+  GraphQLRequestContext,
+  ApolloServerPlugin,
+} from 'apollo-server-plugin-base';
 import {
   getComplexity,
   simpleEstimator,
@@ -10,7 +12,7 @@ import {
 import { MAX_ALLOWED_COMPLEXITY } from '../utils/constants';
 import { IContext } from '../typing';
 
-const complexityPlugin = (schema: GraphQLSchema): PluginDefinition => ({
+const complexityPlugin = (schema: GraphQLSchema): ApolloServerPlugin => ({
   requestDidStart: async (requestContext: GraphQLRequestContext<IContext>) => {
     return {
       async didResolveOperation({ request, document }) {
