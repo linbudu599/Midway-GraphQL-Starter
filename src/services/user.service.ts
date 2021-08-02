@@ -1,5 +1,5 @@
 import { Provide } from '@midwayjs/decorator';
-import { InjectEntityModel, InjectEntityManager } from '@midwayjs/orm';
+import { InjectEntityModel } from '@midwayjs/orm';
 import { Repository, EntityManager, SelectQueryBuilder } from 'typeorm';
 
 import User from '../entities/User.entity';
@@ -13,8 +13,8 @@ export class UserService {
   @InjectEntityModel(User)
   userModel: Repository<User>;
 
-  @InjectEntityManager()
-  entityManager: EntityManager;
+  // @InjectEntityManager()
+  // entityManager: EntityManager;
 
   // you can also use params to create QueryBuilder with(or without) relations
   private createUserQueryBuilder() {

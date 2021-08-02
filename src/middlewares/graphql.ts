@@ -1,6 +1,11 @@
 import * as path from 'path';
 import { Provide, Config, App } from '@midwayjs/decorator';
-import { IWebMiddleware, IMidwayKoaApplication } from '@midwayjs/koa';
+import {
+  IWebMiddleware,
+  IMidwayKoaApplication,
+  IMidwayKoaContext,
+  IMidwayKoaNext,
+} from '@midwayjs/koa';
 
 import { ApolloServer, ServerRegistration } from 'apollo-server-koa';
 import { buildSchemaSync } from 'type-graphql';
@@ -42,6 +47,10 @@ import {
   LessThanDirective,
 } from '../directives/restriction';
 import { getConnection } from 'typeorm';
+import {
+  ApolloServerPluginLandingPageGraphQLPlayground,
+  ApolloServerPluginLandingPageDisabled,
+} from 'apollo-server-core';
 
 @Provide('GraphQLMiddleware')
 export class GraphqlMiddleware implements IWebMiddleware {
@@ -52,71 +61,82 @@ export class GraphqlMiddleware implements IWebMiddleware {
   app: IMidwayKoaApplication;
 
   resolve() {
-    const container = this.app.getApplicationContext();
-    const schema = buildSchemaSync({
-      resolvers: [path.resolve(this.app.getBaseDir(), 'resolver/*')],
-      container,
-      authChecker,
-      authMode: 'error',
-      emitSchemaFile: 'schema.graphql',
-      globalMiddlewares: [ResolveTimeMiddleware, InterceptorOnSpecificUser],
-    });
-
-    SchemaDirectiveVisitor.visitSchemaDirectives(schema, {
-      fetch: FetchDirective,
-      date: DateFormatDirective,
-      auth: AuthDirective,
-      // string transform directives
-      upper: UpperDirective,
-      lower: LowerDirective,
-      camel: CamelCaseDirective,
-      start: StartCaseDirective,
-      capitalize: CapitalizeDirective,
-      kebab: KebabCaseDirective,
-      snake: SnakeCaseDirective,
-      trim: TrimDirective,
-      // restriction directives
-      max: MaxLengthDirective,
-      min: MinLengthDirective,
-      greater: GreaterThanDirective,
-      less: LessThanDirective,
-    });
-
-    const server = new ApolloServer({
-      schema,
-      context: {
-        currentReqUser: {
-          role: UserRole.ADMIN,
-        },
+    return async (_ctx: IMidwayKoaContext, next: IMidwayKoaNext) => {
+      const container = this.app.getApplicationContext();
+      const schema = buildSchemaSync({
+        resolvers: [path.resolve(this.app.getBaseDir(), 'resolver/*')],
         container,
-      } as IContext,
-      plugins: [
-        schemaPlugin(),
-        usagePlugin(),
-        complexityPlugin(schema),
-        extensionPlugin(),
-        ApolloServerLoaderPlugin({
-          typeormGetConnection: getConnection, // for use with TypeORM
-        }),
-      ],
-      // deprecated!
-      // extensions: [() => new CustomExtension()],
-      introspection: true,
-      playground: {
-        settings: {
-          'editor.theme': 'dark',
-          'editor.reuseHeaders': true,
-          'editor.fontSize': 14,
-          'editor.fontFamily': '"Fira Code"',
-          'schema.polling.enable': true,
-          'schema.polling.interval': 5000,
-          'tracing.hideTracingResponse': false,
-          'queryPlan.hideQueryPlanResponse': false,
-        },
-      },
-    });
-    console.log('Apollo-GraphQL Invoke');
+        authChecker,
+        authMode: 'error',
+        emitSchemaFile: 'schema.graphql',
+        globalMiddlewares: [ResolveTimeMiddleware, InterceptorOnSpecificUser],
+      });
 
-    return server.getMiddleware(this.config);
+      // SchemaDirectiveVisitor.visitSchemaDirectives(schema, {
+      //   fetch: FetchDirective,
+      //   date: DateFormatDirective,
+      //   auth: AuthDirective,
+      //   // string transform directives
+      //   upper: UpperDirective,
+      //   lower: LowerDirective,
+      //   camel: CamelCaseDirective,
+      //   start: StartCaseDirective,
+      //   capitalize: CapitalizeDirective,
+      //   kebab: KebabCaseDirective,
+      //   snake: SnakeCaseDirective,
+      //   trim: TrimDirective,
+      //   // restriction directives
+      //   max: MaxLengthDirective,
+      //   min: MinLengthDirective,
+      //   greater: GreaterThanDirective,
+      //   less: LessThanDirective,
+      // });
+
+      const server = new ApolloServer({
+        schema,
+        context: {
+          currentReqUser: {
+            role: UserRole.ADMIN,
+          },
+          container,
+        } as IContext,
+        plugins: [
+          // schemaPlugin(),
+          // usagePlugin(),
+          complexityPlugin(schema),
+          // FIXME: Extension Migration
+          // extensionPlugin(),
+          // FIXME: DataLoader Integration
+          // ApolloServerLoaderPlugin({
+          //   typeormGetConnection: getConnection, // for use with TypeORM
+          // }),
+          process.env.NODE_ENV === 'production'
+            ? ApolloServerPluginLandingPageDisabled()
+            : ApolloServerPluginLandingPageGraphQLPlayground({
+                settings: {
+                  'editor.theme': 'dark',
+                  'editor.reuseHeaders': true,
+                  'editor.fontSize': 14,
+                  'editor.fontFamily': '"Fira Code"',
+                  'schema.polling.enable': true,
+                  'schema.polling.interval': 5000,
+                  'tracing.hideTracingResponse': false,
+                  'queryPlan.hideQueryPlanResponse': false,
+                },
+              }),
+        ],
+        // introspection: true,
+      });
+      await server.start();
+
+      console.log('Apollo-GraphQL Start');
+
+      server.applyMiddleware({
+        app: this.app,
+        ...this.config,
+      });
+
+      await next();
+    };
   }
 }
