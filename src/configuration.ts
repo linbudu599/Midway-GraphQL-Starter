@@ -64,12 +64,6 @@ export class ContainerConfiguration implements ILifeCycle {
 
     // TypeORM Mock Data Seeding
     const connection = getConnection();
-    console.log(
-      'connection: ',
-      connection.entityMetadatas.map(e => e.name)
-    );
-
-    console.log(connection.options);
 
     infoLog(`[ TypeORM ] connection [${connection.name}] established`);
     await createMockUserData();

@@ -25,7 +25,7 @@
     "prisma:push": "prisma db push --schema ./src/prisma/schema.prisma",
     "prisma:migrate": "prisma migrate --preview-feature --schema ./src/prisma/schema.prisma",
     "commit": "git add -A && git-cz",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "codegen": "cross-env DISABLE_PLAYGROUND=true graphql-codegen --config codegen.yml"
   },
   "husky": {
     "hooks": {

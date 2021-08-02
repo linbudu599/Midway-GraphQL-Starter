@@ -4,8 +4,6 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
 
 ## Left Works
 
-
-
 ## Features
 
 - Basic Power of [MidwayJS](https://www.yuque.com/midwayjs/midway_v2)
@@ -16,12 +14,11 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
 
 ### GraphQL Related
 
-- [x] [Apollo-Server](https://www.apollographql.com/docs/apollo-server/)
+- [x] [Apollo-Server V3](https://www.apollographql.com/docs/apollo-server/)
 - [x] [TypeGraphQL](https://typegraphql.com/)
 - [x] [Prisma 2](https://www.prisma.io/)
-- [x] [Directives](src/directives/)
-- [x] [AuthChecker](src/utils/authChecker.ts)
-- [x] [Plugins](src/plugins/)
+- [x] [Custom Directives](src/directives/)
+- [x] [Custom Plugins](src/plugins/)
 - [x] Extensions(**Deprecated Indeed**)
 - [x] Scalars
 - [ ] File Uploads
@@ -75,7 +72,7 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
 ```bash
 yarn
 
-# if prisma is nor removed, it's required to run this command before start
+# If prisma is not removed, it's required to run this command before start
 yarn prisma
 
 # Develop
@@ -117,10 +114,10 @@ If you donot want `Prisma` in your application, just:
   this.app.getApplicationContext().registerObject('prisma', client);
 
   await client.prismaSampleModel.create({
-      data: {
-        version: 2,
-      },
-    });
+    data: {
+      version: 2,
+    },
+  });
 
   client.$disconnect();
   ```

@@ -110,7 +110,8 @@ export class GraphqlMiddleware implements IWebMiddleware {
           // ApolloServerLoaderPlugin({
           //   typeormGetConnection: getConnection, // for use with TypeORM
           // }),
-          process.env.NODE_ENV === 'production'
+          ['production'].includes(process.env.NODE_ENV) ||
+          process.env.DISABLE_PLAYGROUND
             ? ApolloServerPluginLandingPageDisabled()
             : ApolloServerPluginLandingPageGraphQLPlayground({
                 settings: {
