@@ -27,7 +27,6 @@ Enjoy Developing With **MidwayJS** & **GraphQL** !
   - [x] [GraphQL-Tools](https://www.graphql-tools.com) Build, mock, and stitch a GraphQL schema using the schema language
   - [x] [GraphDoc](https://github.com/2fd/graphdoc) Static page generator for documenting GraphQL Schema
   - [x] [GraphQL-Code-Generator](https://github.com/dotansimha/graphql-code-generator) Generate TypeScript Type Definition From GraphQL Schema / Operations.
-  - [x] [GenQL](https://github.com/remorses/genql) Type-Safe GraphQL Query Builder.
 - [x] Example GraphQL Query/Mutation.
 - [x] DataLoader.
 

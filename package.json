@@ -16,7 +16,7 @@
     "ci": "yarn cov",
     "build": "midway-bin build -c",
     "check": "luckyeye",
-    "voyager": "serve -s voyager/index.html -p 8888",
+    "voyager": "serve voyager",
     "docs:gen": "rimraf -rf ./documentation && graphdoc --force",
     "docs:serve": "serve -s ./documentation -s 7777",
     "docs": "yarn docs:gen && yarn docs:serve",
