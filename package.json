@@ -62,7 +62,7 @@
     "graphql": "^15.5.1",
     "graphql-extensions": "^0.15.0",
     "graphql-query-complexity": "^0.8.1",
-    "graphql-tools": "^7.0.5",
+    "graphql-tools": "^8.3.18",
     "graphql-upload": "^12.0.0",
     "graphql-voyager": "^1.0.0-rc.31",
     "helmet": "^4.6.0",
